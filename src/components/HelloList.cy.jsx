@@ -4,7 +4,7 @@ describe('<HelloList />', () => {
   it('renders', () => {
 
     const items = [
-      { name: 'test-name-1', href: 'test-href-2' },
+      { name: 'test-name-1', href: 'test-href-1' },
       { name: 'test-name-2', href: 'test-href-2' }
     ]
 
