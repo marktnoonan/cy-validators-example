@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="hello" data-cy-component="HelloWorld">
     <h1>{{ title }}</h1>
     <HelloIntro />
     <h2>Installed CLI Plugins</h2>

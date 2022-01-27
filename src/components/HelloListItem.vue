@@ -1,5 +1,5 @@
 <template>
-  <li v-if="content">
+  <li v-if="content" data-cy-component="HelloListItem">
     <a :href="content.href" target="_blank" rel="noopener">{{ content.name }}</a>
   </li>
 </template>

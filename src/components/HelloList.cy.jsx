@@ -14,6 +14,6 @@ describe('<HelloList />', () => {
 
   it('does not render without content prop', () => {
     cy.mount(<HelloList />)
-    cy.validateComponent('HelloList', 'noContent')
+    cy.validateComponent('HelloList', 'noContent', { scopeToComponentName: false })
   })
 })

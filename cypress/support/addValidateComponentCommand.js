@@ -11,7 +11,11 @@ export function addValidateComponentCommand () {
     if (!validatorFn) {
       throw new Error(`No component validator found for ${resolvedState} of ${name}`)
     }
-
-    return cy.wrap(validatorFn(resolvedOptions))
+    if (options.scopeToComponentName === false) {
+      return validatorFn(resolvedOptions)
+    }
+    return cy.get(`[data-cy-component=${name}]`)
+    .parent()
+    .within(() => validatorFn(resolvedOptions))
   })
 }

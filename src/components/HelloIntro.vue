@@ -1,5 +1,5 @@
 <template>
-  <p>
+  <p data-cy-component="HelloIntro">
     For a guide and recipes on how to configure / customize this project,
     <br />check out the
     <a
@@ -8,6 +8,11 @@
       rel="noopener"
     >vue-cli documentation</a>.
   </p>
+
+  <details>
+    <summary>For some interactivity, check this out</summary>
+    I am a details element being awesome.
+  </details>
 </template>
 
 <script>
