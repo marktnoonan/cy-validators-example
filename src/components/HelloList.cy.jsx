@@ -9,7 +9,7 @@ describe('<HelloList />', () => {
     ]
 
     cy.mount(<HelloList items={items} />)
-    cy.validateComponent('HelloList', { items: items })
+    cy.validateComponent('HelloList', { props: {items: items }})
   })
 
   it('does not render without content prop', () => {

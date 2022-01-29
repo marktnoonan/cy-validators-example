@@ -7,7 +7,7 @@ describe('<HelloListItem />', () => {
     const testHref = 'test-link-href'
 
     cy.mount(<HelloListItem content={{ name: testName, href: testHref }} />)
-    cy.validateComponent('HelloListItem', { name: testName, href: testHref })
+    cy.validateComponent('HelloListItem', { props: { name: testName, href: testHref } })
   })
 
   it('does not render without content prop', () => {

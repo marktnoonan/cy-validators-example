@@ -8,6 +8,8 @@
     <HelloList :items="listItems.essentialLinks" />
     <h2>Ecosystem</h2>
     <HelloList :items="listItems.ecosystem" />
+    <h2>An empty list</h2>
+    <HelloList data-cy="no-content-list" :items="[]" />
   </div>
 </template>
 

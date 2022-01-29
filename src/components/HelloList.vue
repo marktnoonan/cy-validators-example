@@ -1,5 +1,5 @@
 <template>
-  <ul v-if="items" data-cy-component="HelloList">
+  <ul v-if="items?.length" data-cy-component="HelloList">
     <HelloListItem v-for="item in items" :key="item.name" :content="item" />
   </ul>
 </template>
