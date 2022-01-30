@@ -27,6 +27,7 @@ export default {
     setTimeout(() => {
       this.loading = false
     }, 1000)
+    console.log(window.location)
     if (window.location.search) {
       this.error = true
     }
@@ -36,4 +37,8 @@ export default {
 
 <style>
 @import "./global.css";
+
+#app {
+    margin-top: 60px;
+}
 </style>
