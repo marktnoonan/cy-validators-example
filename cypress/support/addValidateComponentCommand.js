@@ -30,8 +30,8 @@ export function addValidateComponentCommands() {
       return validatorFn(resolvedOptions)
     }
 
-    return cy.get(`${resolvedOptions.selector}[data-cy-component=${name}]`)
-      .parent()
+    return cy.get(`${resolvedOptions.selector}[data-cy-component=${name}]`, {log: false})
+      .parent({log: false})
       .within(() => validatorFn(resolvedOptions))
   })
 
