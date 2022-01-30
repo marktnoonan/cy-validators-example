@@ -3,7 +3,7 @@ describe('the homepage', () => {
     it('renders error if a query param is passed', () => {
         cy.visit('/?test=ohno')
         cy.validateComponent('App', 'loading')
-        cy.validateComponent('App', 'error', {props: {message: 'No query params, please!'}})
+        cy.validateComponent('App', 'error', {props: {message: 'No query params, please!'}}).pause()
     })
     it('renders expected contents on successful visit', () => {
         cy.visit('/')

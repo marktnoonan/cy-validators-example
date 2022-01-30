@@ -20,14 +20,14 @@ export default {
   data() {
     return {
       loading: true,
-      error: false
+      error: false,
+      customThing: ''
     }
   },
   created() {
     setTimeout(() => {
       this.loading = false
     }, 1000)
-    console.log(window.location)
     if (window.location.search) {
       this.error = true
     }
