@@ -19,14 +19,23 @@ Structure of validators object is:
 export const validators = {
     App: {
         defaultRender() {
+            cy.contains('p', 'Pretending to load...').should('not.exist')
             cy.get('img').should('have.attr', 'alt', 'Vue logo')
             cy.validateComponent('HelloWorld', { props: { title: 'Welcome to Your Vue.js App' } })
+        },
+        loading() {
+            cy.contains('p', 'Pretending to load...').should('be.visible')
+        },
+        error(options) {
+            requireTruthy('message', options)
+            cy.validateComponent('ErrorMessage', options)
+            cy.getCyComponent('HelloWorld').should('not.exist')
         }
     },
     HelloWorld: {
         defaultRender(options) {
             const { title } = options.props
-            requireTruthy(title, 'HelloWorld', 'title')
+            requireTruthy('title', options)
             // top level headings - plain assertions
             cy.contains('h1', title).should('be.visible')
             cy.contains('h2', "Installed CLI Plugins").should('be.visible')
@@ -47,8 +56,8 @@ export const validators = {
         defaultRender(options) {
             const { name, href } = options.props
 
-            requireTruthy(name, 'name', "HelloListItem")
-            requireTruthy(href, 'href', "HelloListItem")
+            requireTruthy('name', options)
+            requireTruthy('href', options)
             // check the item exists, and has a link with the right content and href
             cy.contains('li a', name)
                 .should('be.visible')
@@ -61,7 +70,7 @@ export const validators = {
     HelloList: {
         defaultRender(options) {
             const { items } = options?.props
-            requireTruthy(items, 'items', 'HelloList')
+            requireTruthy('items', options)
             cy.get('ul').within(() => {
                 items.forEach(item => {
                     cy.validateComponent('HelloListItem', { props: { name: item.name, href: item.href } })
@@ -69,8 +78,7 @@ export const validators = {
             })
         },
         noContent(options) {
-            const { items } = options?.props
-            requireFalsy(items, 'items', 'HelloList', 'noContent')
+            requireFalsy('items', options)
             cy.get(options.selector + 'ul').should('not.exist')
             cy.validateComponent('HelloListItem', 'noContent', { scopeToComponentName: false, selector: options.selector })
         }
@@ -92,17 +100,26 @@ export const validators = {
             cy.get('@summaryElement').click()
             cy.get('@detailsElement').should('not.have.attr', 'open')
         }
+    },
+    ErrorMessage: {
+        defaultRender(options) {
+            const { message } = options.props
+            requireTruthy('message', options)
+            cy.contains('p', message).should('be.visible')
+        }
     }
 }
 
-function requireTruthy(prop, name = 'prop', component = 'component', state = 'defaultRender') {
-    if (!prop) {
-        throw new Error(`Cannot validate ${state} of ${component} without ${name} prop`)
+function requireTruthy(propName, options) {
+    const { componentName, state } = options.meta
+    if (!options.props[propName]) {
+        throw new Error(`Cannot validate __${state}__ state of __${componentName}__ component without __${propName}__ prop.`)
     }
 }
 
-function requireFalsy(prop, name = 'prop', component = 'component', state = 'defaultRender') {
-    if (prop) {
-        throw new Error(`Cannot validate ${state} of ${component} when ${name} prop as a value`)
+function requireFalsy(propName, options) {
+    const { componentName, state } = options.meta
+    if (options.props[propName]) {
+        throw new Error(`Cannot validate __${state}__ state of __${componentName}__ component when __${propName}__ prop has a value.`)
     }
 }

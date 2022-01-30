@@ -5,7 +5,9 @@ describe('<App />', () => {
 
     cy.mount(<App />)
 
-    cy.validateComponent('App', { scopeToComponentName: false })
+    cy.validateComponent(App.name, 'loading')
+
+    cy.validateComponent(App.name, 'defaultRender')
 
   })
 })

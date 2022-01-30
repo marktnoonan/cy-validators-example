@@ -7,13 +7,12 @@ describe('<HelloList />', () => {
       { name: 'test-name-1', href: 'test-href-1' },
       { name: 'test-name-2', href: 'test-href-2' }
     ]
-
     cy.mount(<HelloList items={items} />)
-    cy.validateComponent('HelloList', { props: {items: items }})
+    cy.validateComponent(HelloList.name, { props: {items: items }})
   })
 
   it('does not render without content prop', () => {
     cy.mount(<HelloList />)
-    cy.validateComponent('HelloList', 'noContent', { scopeToComponentName: false })
+    cy.validateComponent(HelloList.name, 'noContent', { scopeToComponentName: false })
   })
 })

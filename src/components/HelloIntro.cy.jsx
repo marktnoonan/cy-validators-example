@@ -4,6 +4,6 @@ describe('<HelloIntro />', () => {
   it('renders', () => {
 
     cy.mount(<HelloIntro />)
-    cy.validateComponent('HelloIntro')
+    cy.validateComponent(HelloIntro.name)
   })
 })
