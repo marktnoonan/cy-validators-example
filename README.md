@@ -36,7 +36,7 @@ Do:
 Don't:
 
 - ⛔️ ARRANGE: Never use a component's API in a validator, we are already checking a specific state that's been set up by other means. Props, events, etc should be touched in __that component's spec file__.
-- ⛔️ ASSERT: In a component validator, don't assert the state any descendent components directly, instead, use the existing validators for the direct child components, describing the expected state. Only make assertions about, and interact directly with, DOM elements directly rendered by (or "owned" by) the component under test. The whole rest of the component tree will validated
+- ⛔️ ASSERT: In a component validator, don't assert the state any descendent components directly, instead, use the existing validators for the direct child components, describing the expected state. Only make assertions about, and interact directly with, DOM elements directly rendered by (or "owned" by) the component under test. The whole rest of the component tree will be validated through these parent-child relationships.
 
 ### Component Specs
 
@@ -78,7 +78,7 @@ The difference between calling, say, the `defaultRender` validator of the `Hello
 
 There's some stuff going on in this repo to make the pattern easier to implement. Some of it is Vue-specific, like `data-cy-component="$options.name"`.
 
-TODO: more details about testing that components _don't_ appear, avoiding scoping assertions inside components, etc.
+TODO: more details about testing that components _don't_ appear, avoiding scoping assertions inside components, adding escape hatches to only check a certain depth or ignore expensive checks with an `ignore array or something.
 
 ## Project setup
 ```
