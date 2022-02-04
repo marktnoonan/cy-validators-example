@@ -1,16 +1,20 @@
 describe('the homepage', () => {
 
     it('renders error if a query param is passed', () => {
-        cy.visit('/?test=ohno')
+        cy.visit('/#/?test=ohno')
         cy.validateComponent('App', 'loading')
-        cy.validateComponent('App', 'error', {props: {message: 'No query params, please!'}})
+
+        // cy.validateComponent('ErrorMessage', {props: {message: 'No query params, please!'}})
+        // cy.getCyComponent('HelloWorld').should('not.exist')
     })
     it('renders expected contents on successful visit', () => {
         cy.visit('/')
         cy.validateComponent('App', 'loading')
-        cy.validateComponent('App')
+        cy.validateComponent('HeaderBar', { props: { activeItemName: 'Home' } })
+        cy.validateComponent('HelloWorld', { props: { title: 'Welcome to Your Vue.js App' } })
     })
 })
+
 
 // this is a complete suite of e2e tests covering the content and semantic
 // correctness of every piece of content on the page, and the href for every link

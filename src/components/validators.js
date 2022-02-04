@@ -22,15 +22,9 @@ export const validators = {
             cy.validateComponent('HeaderBar')
             cy.contains('p', 'Pretending to load...').should('not.exist')
             cy.get('img').should('have.attr', 'alt', 'Vue logo')
-            cy.validateComponent('HelloWorld', { props: { title: 'Welcome to Your Vue.js App' } })
         },
         loading() {
             cy.contains('p', 'Pretending to load...').should('be.visible')
-        },
-        error(options) {
-            requireTruthy('message', options)
-            cy.validateComponent('ErrorMessage', options)
-            cy.getCyComponent('HelloWorld').should('not.exist')
         }
     },
     HelloWorld: {
@@ -55,17 +49,34 @@ export const validators = {
     },
     HelloListItem: {
         defaultRender(options) {
-            const { name, href } = options.props
+            const { name, href, active } = options.props
 
             requireTruthy('name', options)
             requireTruthy('href', options)
             // check the item exists, and has a link with the right content and href
             cy.contains('li a', name)
                 .should('be.visible')
-                .should('have.attr', 'href', href)
+                .and('have.attr', 'href', href)
+
+            if (active) {
+                cy.contains('li a', name)
+                    .should('have.class', active)
+            } else {
+                cy.contains('li a', name)
+                    .should('not.have.class', active)
+            }
         },
         noContent(options) {
             cy.get(`${options.selector} li`).should('not.exist')
+        },
+        active() {
+            // this is a real bare bones assertion
+            // but we just want to know if, inside this component
+            // _something_ is active. The defaultRender checks 
+            // that this class isn't found in the default state.
+            // Checking CSS classes is not great, but this is just an
+            // example of state to inspect
+            cy.get('.active')
         }
     },
     HelloList: {
@@ -74,7 +85,7 @@ export const validators = {
             requireTruthy('items', options)
             cy.get('ul').within(() => {
                 items.forEach(item => {
-                    cy.validateComponent('HelloListItem', { props: { name: item.name, href: item.href } })
+                    cy.validateComponent('HelloListItem', { props: { name: item.name, href: item.href, active: item.active } })
                 });
             })
         },
@@ -111,7 +122,7 @@ export const validators = {
     },
     HeaderBar: {
         defaultRender() {
-            const items =[ {
+            const items = [{
                 name: 'Home',
                 href: '#/'
             },
@@ -119,8 +130,13 @@ export const validators = {
                 name: 'Some other place',
                 href: '#/other-place'
             }
-        ]
-            cy.validateComponent('HelloList', { props: { items }})
+            ]
+            cy.validateComponent('HelloList', { props: { items } })
+        }
+    },
+    OtherPlace: {
+        defaultRender() {
+            cy.contains('Some Other Place').should('be.visible')
         }
     }
 }

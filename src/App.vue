@@ -5,7 +5,8 @@
     <ErrorMessage v-else-if="error" message="No query params, please!" />
     <div v-else>
       <img alt="Vue logo" src="./assets/logo.png" />
-      <router-view />
+      <router-view title="Welcome to Your Vue.js App"/>
+      <HelloWorld />
     </div>
   </main>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <li v-if="content" :data-cy-component="$options.name">
+  <li v-if="content" :data-cy-component="$options.name" :class="content.active ? 'active' : ''">
     <a :href="content.href">{{ content.name }}</a>
   </li>
 </template>
@@ -13,3 +13,8 @@ export default {
 }
 </script>
 
+<style scoped>
+.active {
+  outline: 1px solid rgb(85, 173, 144);
+}
+</style>

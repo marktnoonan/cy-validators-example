@@ -1,9 +1,14 @@
 import HeaderBar from "./HeaderBar.vue"
+import router from '../router'
 
 describe('<HeaderBar />', { viewportHeight: 80, viewportWidth: 800 }, () => {
   
   it('renders', () => {
-    cy.mount(<HeaderBar />)
+    cy.mount(<HeaderBar />, {
+      global: {
+        plugins: [router]
+      }
+    })
     cy.validateComponent(HeaderBar.name)
   })
 
