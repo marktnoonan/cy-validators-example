@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import HelloList from "./HelloList.vue"
-import HelloIntro from "./HelloIntro.vue"
-import { listItems } from "./list-items"
+import HelloList from "../components/HelloList.vue"
+import HelloIntro from "../components/HelloIntro.vue"
+import { listItems } from "../components/list-items"
 
 export default {
   name: 'HelloWorld',

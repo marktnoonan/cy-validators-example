@@ -1,6 +1,6 @@
 <template>
   <li v-if="content" :data-cy-component="$options.name">
-    <a :href="content.href" target="_blank" rel="noopener">{{ content.name }}</a>
+    <a :href="content.href">{{ content.name }}</a>
   </li>
 </template>
 

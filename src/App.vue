@@ -5,20 +5,18 @@
     <ErrorMessage v-else-if="error" message="No query params, please!" />
     <div v-else>
       <img alt="Vue logo" src="./assets/logo.png" />
-      <HelloWorld title="Welcome to Your Vue.js App" />
+      <router-view />
     </div>
   </main>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 import ErrorMessage from './components/ErrorMessage.vue'
 import HeaderBar from './components/HeaderBar.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
     ErrorMessage,
     HeaderBar
   },

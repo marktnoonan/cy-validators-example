@@ -4,11 +4,11 @@
     <HelloList
       :items="[{
         name: 'Home',
-        href: '/'
+        href: '#/'
       },
       {
         name: 'Some other place',
-        href: '/other-place'
+        href: '#/other-place'
       }
       ]"
     />

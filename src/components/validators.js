@@ -113,11 +113,11 @@ export const validators = {
         defaultRender() {
             const items =[ {
                 name: 'Home',
-                href: '/'
+                href: '#/'
             },
             {
                 name: 'Some other place',
-                href: '/other-place'
+                href: '#/other-place'
             }
         ]
             cy.validateComponent('HelloList', { props: { items }})
