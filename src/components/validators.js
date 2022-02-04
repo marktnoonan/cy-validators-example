@@ -19,6 +19,7 @@ Structure of validators object is:
 export const validators = {
     App: {
         defaultRender() {
+            cy.validateComponent('HeaderBar')
             cy.contains('p', 'Pretending to load...').should('not.exist')
             cy.get('img').should('have.attr', 'alt', 'Vue logo')
             cy.validateComponent('HelloWorld', { props: { title: 'Welcome to Your Vue.js App' } })
@@ -106,6 +107,20 @@ export const validators = {
             const { message } = options.props
             requireTruthy('message', options)
             cy.contains('p', message).should('be.visible')
+        }
+    },
+    HeaderBar: {
+        defaultRender() {
+            const items =[ {
+                name: 'Home',
+                href: '/'
+            },
+            {
+                name: 'Some other place',
+                href: '/other-place'
+            }
+        ]
+            cy.validateComponent('HelloList', { props: { items }})
         }
     }
 }

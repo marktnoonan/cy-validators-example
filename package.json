@@ -20,7 +20,7 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "babel-eslint": "^10.1.0",
-    "cypress": "https://cdn.cypress.io/beta/npm/10.0.0/circle-10.0-release-c2731890940d40957fe5ac47b000bcb6ebb784a2/cypress.tgz",
+    "cypress": "https://cdn.cypress.io/beta/npm/10.0.0/circle-10.0-release-02a669daaeb2d5f40108f17c6e9fc39de6ae44e1/cypress.tgz",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0"
   },

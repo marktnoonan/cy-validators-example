@@ -1,3 +1,6 @@
+body {
+  margin: 0;
+}
 .app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -19,4 +22,7 @@
   }
   a {
     color: #42b983;
+  }
+  a:hover {
+    color: #24724f
   }
