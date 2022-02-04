@@ -60,10 +60,12 @@ export const validators = {
 
             if (active) {
                 cy.contains('li a', name)
-                    .should('have.class', active)
+                    .closest('.active')
+                    .should('exist')
             } else {
                 cy.contains('li a', name)
-                    .should('not.have.class', active)
+                    .closest('.active')
+                    .should('not.exist')
             }
         },
         noContent(options) {
@@ -121,7 +123,8 @@ export const validators = {
         }
     },
     HeaderBar: {
-        defaultRender() {
+        defaultRender(options) {
+            const { activeItemName } = options.props
             const items = [{
                 name: 'Home',
                 href: '#/'
@@ -129,8 +132,15 @@ export const validators = {
             {
                 name: 'Some other place',
                 href: '#/other-place'
+            }]
+
+            if (activeItemName) {
+                const shouldBeActive = items.findIndex((item) => item.name === activeItemName)
+                if (shouldBeActive === -1) {
+                    throw new Error(`No nav item found with name matching ${activeItemName}`)
+                }
+                items[shouldBeActive].active = true
             }
-            ]
             cy.validateComponent('HelloList', { props: { items } })
         }
     },

@@ -31,7 +31,6 @@ export default {
     setTimeout(() => {
       this.loading = false
     }, 1000)
-    console.log(window.location)
     if (window.location.search) {
       this.error = true
     }
