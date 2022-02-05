@@ -19,9 +19,13 @@ Structure of validators object is:
 export const validators = {
     App: {
         defaultRender() {
-            cy.validateComponent('HeaderBar')
+            cy.validateComponent('HeaderBar', { props: { activeItemName: 'Home' } })
             cy.contains('p', 'Pretending to load...').should('not.exist')
             cy.get('img').should('have.attr', 'alt', 'Vue logo')
+            cy.contains('Some other place').click()
+            cy.validateComponent('HeaderBar', { props: { activeItemName: 'Some other place' } })
+            cy.validateComponent('OtherPlace')
+
         },
         loading() {
             cy.contains('p', 'Pretending to load...').should('be.visible')
