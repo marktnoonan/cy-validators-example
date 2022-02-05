@@ -157,6 +157,33 @@ export const validators = {
         defaultRender() {
             cy.contains('Some Other Place').should('be.visible')
         }
+    },
+    DisclosureWidget: {
+        defaultRender(options) {
+            const {title, body} = options.props
+
+            requireTruthy('title', options)
+            requireTruthy('body', options)
+
+            cy.contains('summary', title)
+            .as('summary')
+            .should('be.visible')
+
+            cy.get('@summary')
+            .click()
+
+            cy.contains('details', body)
+            .should('have.attr', 'open')
+
+            cy.get('@summary')
+            .click()
+
+            cy.contains(body)
+            .should('not.have.attr', 'open')
+
+        
+
+        }
     }
 }
 

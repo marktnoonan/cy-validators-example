@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import HelloList from "./HelloList.vue"
 
 describe('<HelloList />',{viewportHeight: 60, viewportWidth: 400}, () => {

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import HelloListItem from "./HelloListItem.vue"
 
 const testName = 'hello test'

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import OtherPlace from "./OtherPlace.vue"
 
 describe('<OtherPlace />', {viewportHeight: 800, viewportWidth: 1200}, () => {

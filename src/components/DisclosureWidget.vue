@@ -1,5 +1,5 @@
 <template>
-    <details>
+    <details :data-cy-component="$options.name">
         <summary><slot name="title">Untitled Disclosure 😱</slot></summary>
         <slot>Details with no details 😬</slot>
     </details>
@@ -7,6 +7,6 @@
 
 <script>
 export default {
-    name: 'DisclosureParent'
+    name: 'DisclosureWidget'
 }
 </script>
