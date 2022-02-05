@@ -31,7 +31,7 @@ export default {
     setTimeout(() => {
       this.loading = false
     }, 1000)
-    if (window.location.search) {
+    if (window.location.hash.includes("?")) {
       this.error = true
     }
   }
