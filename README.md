@@ -80,6 +80,16 @@ There's some stuff going on in this repo to make the pattern easier to implement
 
 TODO: more details about testing that components _don't_ appear, avoiding scoping assertions inside components, adding escape hatches to only check a certain depth or ignore expensive checks with an `ignore array or something.
 
+Topics to cover:
+
+- Use of slots / Nested uses of the same component (related to slots)
+- Component Testing with a router
+- Depth of full validations / Existence checks
+- Multiple instances of same component on a page / Identifying specific instances with data-cy
+- Refactoring - change code, keep selectors, tests should still pass, then update tests.
+- Reporting - can we buildup a log of what parts of the component tree were tested?
+- Tooling - using `$0.closest('[data-cy-component]').dataset.cyComponent` to show component names in various places like playground
+
 ## Project setup
 ```
 npm install
