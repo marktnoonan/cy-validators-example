@@ -1,13 +1,19 @@
 import App from "./App.vue"
+import router from './router'
+
 
 describe('<App />', () => {
   it('renders', () => {
 
-    cy.mount(<App />)
+    cy.mount(<App />, {
+      global: {
+        plugins: [router]
+      }
+    })
 
     cy.validateComponent(App.name, 'loading')
 
-    cy.validateComponent(App.name, 'defaultRender')
+    cy.validateComponent(App.name)
 
   })
   

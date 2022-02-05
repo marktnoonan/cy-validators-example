@@ -4,7 +4,7 @@
     <p v-if="loading">Pretending to load...</p>
     <ErrorMessage v-else-if="error" message="No query params, please!" />
     <div v-else>
-      <img alt="Vue logo" src="./assets/logo.png" />
+      <img alt="Vue logo" src="./assets/logo.png" width="60" height="60" />
       <router-view title="Welcome to Your Vue.js App"/>
       <HelloWorld />
     </div>
