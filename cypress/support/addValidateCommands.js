@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { validators } from '../../src/components/validators.js'
 
 const defaultOptions = { selector: '', props: {}, scopeToComponentName: true }
@@ -35,8 +36,12 @@ export function addValidateCommands() {
       .within(() => validatorFn(resolvedOptions))
   })
 
-  Cypress.Commands.add('getCyComponent', (name) => {
-    return cy.get(`[data-cy-component=${name}]`)
+  Cypress.Commands.add('getCyComponent', (nameOrElement) => {
+    if (typeof nameOrElement === 'string') {
+      return cy.get(`[data-cy-component=${nameOrElement}]`)
+    } else {
+      return nameOrElement.closest('[data-cy-component]')
+    }
   })
   
 }
