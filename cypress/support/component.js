@@ -1,4 +1,4 @@
-import { addValidateComponentCommands } from './addValidateComponentCommand'
+import { addValidateCommands } from './addValidateCommands'
 import {mount} from "@cypress/vue"
 import styles from "../../src/global.css"
 
@@ -14,5 +14,5 @@ Cypress.Commands.add("mount", (component, options) => {
     return mount(component, options)
 });
 
-addValidateComponentCommands()
+addValidateCommands()
 

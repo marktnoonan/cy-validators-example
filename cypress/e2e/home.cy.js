@@ -2,16 +2,16 @@ describe('the homepage', () => {
 
     it('renders error if a query param is passed', () => {
         cy.visit('/#/?test=ohno')
-        cy.validateComponent('App', 'loading')
+        cy.validate('App', 'loading')
 
-        // cy.validateComponent('ErrorMessage', {props: {message: 'No query params, please!'}})
+        // cy.validate('ErrorMessage', {props: {message: 'No query params, please!'}})
         // cy.getCyComponent('HelloWorld').should('not.exist')
     })
     it('renders expected contents on successful visit', () => {
         cy.visit('/')
-        cy.validateComponent('App', 'loading')
-        cy.validateComponent('HeaderBar', { props: { activeItemName: 'Home' } })
-        cy.validateComponent('HelloWorld', { props: { title: 'Welcome to Your Vue.js App' } })
+        cy.validate('App', 'loading')
+        cy.validate('HeaderBar', { props: { activeItemName: 'Home' } })
+        cy.validate('HelloWorld', { props: { title: 'Welcome to Your Vue.js App' } })
     })
 })
 
@@ -22,9 +22,9 @@ describe('the homepage', () => {
 
 // How this works
 
-// cy.validateComponent('App', 'loading') runs the App component "loading" state validators only
+// cy.validate('App', 'loading') runs the App component "loading" state validators only
 //
-// cy.validateComponent('App') runs the App component "defaultRender" state validators.
+// cy.validate('App') runs the App component "defaultRender" state validators.
 // 
 // App validator, checks the image and alt text, which aren't in any child component,
 // then calls the HelloWorld validator
@@ -40,4 +40,4 @@ describe('the homepage', () => {
 // The application should still go through the loading state, and then reach the error state.
 // This code passes down the expected Error message, and the App error state validator will know what to do with it:
 //
-//  cy.validateComponent('App', 'error', {props: {message: 'No query params, please!'}})
+//  cy.validate('App', 'error', {props: {message: 'No query params, please!'}})

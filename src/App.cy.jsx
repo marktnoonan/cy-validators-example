@@ -11,9 +11,9 @@ describe('<App />', () => {
       }
     })
 
-    cy.validateComponent(App.name, 'loading')
+    cy.validate(App.name, 'loading')
 
-    cy.validateComponent(App.name)
+    cy.validate(App.name)
 
   })
   

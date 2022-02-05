@@ -12,9 +12,9 @@ As the levels of nesting and complexity increase in a component-based applicatio
 
 Using component validators, our goal is that in the full spectrum of specs, from the smallest component test to the longest E2E user journey, the test code to validate a certain component in a certain state is only written once, and reused as needed.
 
-This repo is an example of how this might work. Component tests are a responsible for mounting and setting up the component for testing each state, and then calling `cy.validateComponent()` with the component's name, state to validate, and an options object containing anything else needed, like variable data.
+This repo is an example of how this might work. Component tests are a responsible for mounting and setting up the component for testing each state, and then calling `cy.validate()` with the component's name, state to validate, and an options object containing anything else needed, like variable data.
 
-`validators.js` contains almost all of the assertions and interactions for our tests, organized in an object according to component name, and then the name of the sate to be tested. `cy.validateComponent` will look up these validators when called with a component name and state to validate.
+`validators.js` contains almost all of the assertions and interactions for our tests, organized in an object according to component name, and then the name of the sate to be tested. `cy.validate` will look up these validators when called with a component name and state to validate.
 
 Since the validators themselves are just regular Cypress code, they can make DOM assertions and click around, but also use the `cy.validateComnponent` command to assert the expected state of direct child components of the component being tested. In this way, tests of higher level component, and even E2E tests, can fully check the validity of the entire component tree, starting at any given node in that tree, without duplicating a single assertion or interaction in the code.
 
@@ -71,7 +71,7 @@ Validators should be "written once, called at least twice". At minimum, we shoul
 The difference between calling, say, the `defaultRender` validator of the `HelloListItem` component from the `HelloListItem` __component spec__ and the parent `HelloList` `defaultRender` state __validator__, is in how the state is created: 
 
 - In the spec, we sets a `content` prop directly on the `ListItem` when it is mounted. It confirms the API of the component matches expectations in the `defaultRender` state - given a content object, it uses the `name` and `href` from that object to make a list item with a link to that `href`. Over time, this test ensures the shape of the Lego brick isn't changing.
-- When the `HelloList` component __validator__ for the state where a `defaultRender` is expected for `HelloListItem` is called, the `HelloList` component __spec__ has passed an array of `items` as a prop to `HelloList`. By calling `cy.validateComponent('HelloListItem', { props: { name: item.name, href: item.href } })` for each `item` in the array, we confirm the child component was __used correctly__ by the parent - all the expected children rendered. No extra assertion code had to be written.
+- When the `HelloList` component __validator__ for the state where a `defaultRender` is expected for `HelloListItem` is called, the `HelloList` component __spec__ has passed an array of `items` as a prop to `HelloList`. By calling `cy.validate('HelloListItem', { props: { name: item.name, href: item.href } })` for each `item` in the array, we confirm the child component was __used correctly__ by the parent - all the expected children rendered. No extra assertion code had to be written.
 
 
 ### Edges Cases, Escape Hatches, & Shenanigans

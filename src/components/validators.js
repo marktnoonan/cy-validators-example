@@ -11,6 +11,11 @@ Structure of validators object is:
         [StateValidatorFunction](options) {
             // assert the validity of the state
             // based on expected static values and dynamic values from `options`
+
+            // by default, these assertions are scoped to locate elements
+            // *within the data-cy-component selector for that component*
+            // - this can be disabled with the `scopeToComponentName` option
+            // when calling `cy.validate` - useful to confirm a component doesn't exist
         }
     }
 }
@@ -19,12 +24,12 @@ Structure of validators object is:
 export const validators = {
     App: {
         defaultRender() {
-            cy.validateComponent('HeaderBar', { props: { activeItemName: 'Home' } })
-            cy.contains('p', 'Pretending to load...').should('not.exist')
+            cy.validate('HeaderBar', { props: { activeItemName: 'Home' } })
+            cy.contains('Pretending to load...').should('not.exist')
             cy.get('img').should('have.attr', 'alt', 'Vue logo')
             cy.contains('Some other place').click()
-            cy.validateComponent('HeaderBar', { props: { activeItemName: 'Some other place' } })
-            cy.validateComponent('OtherPlace')
+            cy.validate('HeaderBar', { props: { activeItemName: 'Some other place' } })
+            cy.validate('OtherPlace')
 
         },
         loading() {
@@ -42,13 +47,13 @@ export const validators = {
             cy.contains('h2', "Ecosystem").should('be.visible')
 
             // nested intro component, just validate
-            cy.validateComponent('HelloIntro')
+            cy.validate('HelloIntro')
 
             // nested list components, just validate
-            cy.validateComponent('HelloList', { props: { items: listItems.CLI } })
-            cy.validateComponent('HelloList', { props: { items: listItems.essentialLinks } })
-            cy.validateComponent('HelloList', { props: { items: listItems.ecosystem } })
-            cy.validateComponent('HelloList', 'noContent', { selector: '[data-cy=no-content-list]', scopeToComponentName: false })
+            cy.validate('HelloList', { props: { items: listItems.CLI } })
+            cy.validate('HelloList', { props: { items: listItems.essentialLinks } })
+            cy.validate('HelloList', { props: { items: listItems.ecosystem } })
+            cy.validate('HelloList', 'noContent', { selector: '[data-cy=no-content-list]', scopeToComponentName: false })
         },
     },
     HelloListItem: {
@@ -91,14 +96,14 @@ export const validators = {
             requireTruthy('items', options)
             cy.get('ul').within(() => {
                 items.forEach(item => {
-                    cy.validateComponent('HelloListItem', { props: { name: item.name, href: item.href, active: item.active } })
+                    cy.validate('HelloListItem', { props: { name: item.name, href: item.href, active: item.active } })
                 });
             })
         },
         noContent(options) {
             requireFalsy('items', options)
             cy.get(options.selector + 'ul').should('not.exist')
-            cy.validateComponent('HelloListItem', 'noContent', { scopeToComponentName: false, selector: options.selector })
+            cy.validate('HelloListItem', 'noContent', { scopeToComponentName: false, selector: options.selector })
         }
     },
     HelloIntro: {
@@ -145,7 +150,7 @@ export const validators = {
                 }
                 items[shouldBeActive].active = true
             }
-            cy.validateComponent('HelloList', { props: { items } })
+            cy.validate('HelloList', { props: { items } })
         }
     },
     OtherPlace: {

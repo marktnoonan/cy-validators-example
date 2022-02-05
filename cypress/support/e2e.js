@@ -1,3 +1,3 @@
-import { addValidateComponentCommands } from './addValidateComponentCommand'
+import { addValidateCommands } from './addValidateCommands'
 
-addValidateComponentCommands()
+addValidateCommands()

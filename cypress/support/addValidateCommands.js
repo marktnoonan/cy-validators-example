@@ -2,8 +2,8 @@ import { validators } from '../../src/components/validators.js'
 
 const defaultOptions = { selector: '', props: {}, scopeToComponentName: true }
 
-export function addValidateComponentCommands() {
-  Cypress.Commands.add('validateComponent', (name, stateOrOptions, options) => {
+export function addValidateCommands() {
+  Cypress.Commands.add('validate', (name, stateOrOptions, options) => {
 
     const resolvedState = typeof stateOrOptions === 'string' ? stateOrOptions : 'defaultRender'
 

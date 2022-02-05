@@ -4,6 +4,6 @@ describe('<HelloIntro />', {viewportHeight: 200}, () => {
   it('renders', () => {
 
     cy.mount(<HelloIntro />)
-    cy.validateComponent(HelloIntro.name)
+    cy.validate(HelloIntro.name)
   })
 })

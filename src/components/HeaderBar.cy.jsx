@@ -9,7 +9,7 @@ describe('<HeaderBar />', { viewportHeight: 80, viewportWidth: 800 }, () => {
         plugins: [router]
       }
     })
-    cy.validateComponent(HeaderBar.name)
+    cy.validate(HeaderBar.name)
   })
 
 })
