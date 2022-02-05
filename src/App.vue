@@ -6,7 +6,6 @@
     <div v-else>
       <img alt="Vue logo" src="./assets/logo.png" width="60" height="60" />
       <router-view title="Welcome to Your Vue.js App"/>
-      <HelloWorld />
     </div>
   </main>
 </template>

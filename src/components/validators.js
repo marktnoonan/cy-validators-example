@@ -23,12 +23,12 @@ Structure of validators object is:
 
 export const validators = {
     App: {
-        defaultRender() {
-            cy.validate('HeaderBar', { props: { activeItemName: 'Home' } })
+        defaultRender(options) {
+            cy.validate('HeaderBar', mergeOptions(options, { props: { activeItemName: 'Home' } }))
             cy.contains('Pretending to load...').should('not.exist')
             cy.get('img').should('have.attr', 'alt', 'Vue logo')
             cy.contains('Some other place').click()
-            cy.validate('HeaderBar', { props: { activeItemName: 'Some other place' } })
+            cy.validate('HeaderBar', mergeOptions(options, { props: { activeItemName: 'Some other place' } }))
             cy.validate('OtherPlace')
 
         },
@@ -47,32 +47,34 @@ export const validators = {
             cy.contains('h2', "Ecosystem").should('be.visible')
 
             // nested intro component, just validate
-            cy.validate('HelloIntro')
+            cy.validate('HelloIntro', options)
 
             // nested list components, just validate
-            cy.validate('HelloList', { props: { items: listItems.CLI } })
-            cy.validate('HelloList', { props: { items: listItems.essentialLinks } })
-            cy.validate('HelloList', { props: { items: listItems.ecosystem } })
-            cy.validate('HelloList', 'noContent', { selector: '[data-cy=no-content-list]', scopeToComponentName: false })
+            cy.validate('HelloList', mergeOptions(options, { props: { items: listItems.CLI } }))
+            cy.validate('HelloList', mergeOptions(options, { props: { items: listItems.essentialLinks } }))
+            cy.validate('HelloList', mergeOptions(options, { props: { items: listItems.ecosystem } }))
+            cy.validate('HelloList', 'noContent', mergeOptions(options, { selector: '[data-cy=no-content-list]', scopeToComponentName: false }))
         },
     },
     HelloListItem: {
         defaultRender(options) {
+            options.component.should('have.prop', 'nodeName', 'LI')
+
             const { name, href, active } = options.props
 
             requireTruthy('name', options)
             requireTruthy('href', options)
             // check the item exists, and has a link with the right content and href
-            cy.contains('li a', name)
+            cy.contains('a', name)
                 .should('be.visible')
                 .and('have.attr', 'href', href)
 
             if (active) {
-                cy.contains('li a', name)
+                cy.contains('a', name)
                     .closest('.active')
                     .should('exist')
             } else {
-                cy.contains('li a', name)
+                cy.contains('a', name)
                     .closest('.active')
                     .should('not.exist')
             }
@@ -94,16 +96,16 @@ export const validators = {
         defaultRender(options) {
             const { items } = options?.props
             requireTruthy('items', options)
-            cy.get('ul').within(() => {
-                items.forEach(item => {
-                    cy.validate('HelloListItem', { props: { name: item.name, href: item.href, active: item.active } })
-                });
-            })
+
+            options.component.should('have.prop', 'nodeName', 'UL')
+            items.forEach(item => {
+                cy.validate('HelloListItem', mergeOptions(options, { props: { name: item.name, href: item.href, active: item.active } }))
+            });
         },
         noContent(options) {
             requireFalsy('items', options)
             cy.get(options.selector + 'ul').should('not.exist')
-            cy.validate('HelloListItem', 'noContent', { scopeToComponentName: false, selector: options.selector })
+            cy.validate('HelloListItem', 'noContent', mergeOptions(options, { scopeToComponentName: false, selector: options.selector }))
         }
     },
     HelloIntro: {
@@ -150,7 +152,7 @@ export const validators = {
                 }
                 items[shouldBeActive].active = true
             }
-            cy.validate('HelloList', { props: { items } })
+            cy.validate('HelloList', mergeOptions(options, { props: { items } }))
         }
     },
     OtherPlace: {
@@ -160,32 +162,34 @@ export const validators = {
     },
     DisclosureWidget: {
         defaultRender(options) {
-            const {title, body} = options.props
+            const { title, body } = options.props
 
             requireTruthy('title', options)
             requireTruthy('body', options)
 
             cy.contains('summary', title)
-            .as('summary')
-            .should('be.visible')
+                .as('summary')
+                .should('be.visible')
 
             cy.get('@summary')
-            .click()
+                .click()
 
             cy.contains('details', body)
-            .should('have.attr', 'open')
+                .should('have.attr', 'open')
 
             cy.get('@summary')
-            .click()
+                .click()
 
             cy.contains(body)
-            .should('not.have.attr', 'open')
+                .should('not.have.attr', 'open')
 
-        
+
 
         }
     }
 }
+
+// helpers
 
 function requireTruthy(propName, options) {
     const { componentName, state } = options.meta
@@ -199,4 +203,9 @@ function requireFalsy(propName, options) {
     if (options.props[propName]) {
         throw new Error(`Cannot validate __${state}__ state of __${componentName}__ component when __${propName}__ prop has a value.`)
     }
+}
+
+function mergeOptions(optionsObject, objectToMerge) {
+    const optsClone = Cypress._.cloneDeep(optionsObject)
+    return Cypress._.merge(optsClone, objectToMerge)
 }
