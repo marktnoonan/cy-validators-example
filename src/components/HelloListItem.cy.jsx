@@ -7,7 +7,7 @@ const testContent = { name: 'hello test', href: '#test-link-href' }
 describe('<HelloListItem />', { viewportHeight: 40, viewportWidth: 200 }, () => {
   it('does not render without content prop', () => {
     cy.mount(<HelloListItem />)
-    cy.validate(HelloListItem.name, 'noContent', { scopeToComponentName: false })
+    cy.getCyComponent(HelloListItem.name).should('not.exist')
   })
 
   it('renders and active state if item is active', () => {

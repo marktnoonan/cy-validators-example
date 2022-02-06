@@ -4,7 +4,7 @@ import HelloList from "./HelloList.vue"
 describe('<HelloList />',{viewportHeight: 60, viewportWidth: 400}, () => {
   it('does not render without content prop', () => {
     cy.mount(<HelloList />)
-    cy.validate(HelloList.name, 'noContent', { scopeToComponentName: false })
+    cy.getCyComponent(HelloList.name).should('not.exist')
   })
 
   it('renders', () => {

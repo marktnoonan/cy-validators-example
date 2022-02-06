@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { validators } from '../../src/components/validators.js'
 
-const defaultOptions = { selector: '', should: 'exist', props: {}, scopeToComponentName: true }
+const defaultOptions = { selector: '', should: 'exist', props: {} }
 
 export function addValidateCommands() {
   Cypress.Commands.add('validate', (name, stateOrOptions, options) => {
@@ -39,11 +39,6 @@ export function addValidateCommands() {
         cy.log('depth limit reached')
         return
       }
-    }
-
-    // if we aren't locating within a component, go on and validate
-    if (resolvedOptions.scopeToComponentName === false) {
-      return validatorFn(resolvedOptions)
     }
 
     return cy.getCyComponent(name, resolvedOptions.selector)

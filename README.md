@@ -41,8 +41,7 @@ Don't:
 
 Notes: 
 
-By default, component validators are scoped to run commands against the DOM __within__ a component. The top level element (the one with the `data-cy-component` attribute) itself is outside the scope of your regular commands and assertions in a validator. That layer is available in validators as `component` in your `options` object. Validators can also be called with `scopeToComponentName: false` in the `options` to skip this completely.
-
+Component validators are scoped to run commands against the DOM __within__ a component. The top level element (the one with the `data-cy-component` attribute) itself is outside the scope of your regular commands and assertions in a validator. That layer is available in validators as `component` in the `options` object.
 ### Component Specs
 
 Dos:
@@ -100,23 +99,28 @@ There's some stuff going on in this repo to make the pattern easier to implement
 
 TODO: more details about testing that components _don't_ appear, avoiding scoping assertions inside components, adding escape hatches to only check a certain depth or ignore expensive checks with an `ignore array or something.
 
-Topics to cover:
+#### Selector Playground
+
+In this project, I've customized the behavior of the selector playground so that for `cy.get()` it will give you the selector for the component that owns the element you click. This selector is not intended to be used directly in specs (validators handle this) but it will tell you which validator to use if you want to assert about a specific element. 
+
+Of course, this breaks the expected behavior of `cy.get()` in the playground, so it's just an example. In theory, the playground could know about the `data-cy-component` attribute and we wouldn't take over `cy.get()`'s playground behavior, we'd have a `cy.getCyComponent()` option that uses the component name to create something like `cy.getCyComponent('ListItem')` when you click on something where ListItem is the closest parent component.
+
+Other topics to cover:
 
 - Use of slots / Nested uses of the same component (related to slots)
 - Component Testing with a router - especially the real router
-- Depth of full validations / Existence checks
+- Depth of validations / Existence checks
 - Multiple instances of same component on a page / Identifying specific instances with data-cy
-- Refactoring - change code, keep selectors, tests should still pass, then update tests.
-- Reporting - can we buildup a log of what parts of the component tree were tested?
-- Tooling - using `$0.closest('[data-cy-component]').dataset.cyComponent` to show component names in various places like playground
+- Refactoring - change code, keep selectors, tests should still pass, then update tests? Or update tests to reflect new architecture, they fail, change data-cy-component selectors to get tests passing, then refactor code to make the new selectors properly match the top level elements of components. Both work.
+- Reporting - can we buildup a log of what parts of the component tree were tested in a given run? Can we flag component states that are tested from a component spec but never tested elsewhere (as in, maybe no consumer can ever reach this state, which would be good to know)
 
 Shenanigans:
 
 - data-cy-component
 - grabbing the top-level component element
 - conditionals within states (eg, active vs inactive) header nav items - make new state fn or fork assertions within a given state?
-- hover/focus states etc.
-- explain `mergeOptions` and/or find a better name for it, or find a way to do this from `cy.validate` and not have to pass things
+- hover/focus states etc?
+- explain `extendOptions` and/or find a better name for it, or find a way to do this from `cy.validate` and not have to pass things down at all
 
 ## Project setup
 ```
