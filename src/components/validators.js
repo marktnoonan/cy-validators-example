@@ -139,7 +139,19 @@ export const validators = {
     },
     OtherPlace: {
         defaultRender() {
-            cy.contains('Some Other Place').should('be.visible')
+            // slots/nesting example -- since OtherPlace.vue owns the markup in the slots for these DisclosureWidget component, 
+            // we are interacting with some elements rendered through the child directly, as well as validating
+            // the DisclosureWidget's behavior in this n
+
+            // Is is proper to have the headings inside a button? Probably not, should check.
+
+            cy.contains('h1','Some Other Place').should('be.visible')
+            cy.validate('DisclosureWidget', {props: {title: 'Outer Disclosure Title', body: 'Outer body'}})
+            cy.contains('h2','Outer Disclosure Title').click()
+            cy.validate('DisclosureWidget', {props: {title: 'Inner Disclosure Title', body: 'Inner Disclosure Body'}})
+            cy.contains('h3', 'Inner Disclosure Title').click()
+            cy.validate('DisclosureWidget', {props: {title: 'Inner INNER Disclosure Title', body: 'Inner INNER Disclosure Body'}})
+            cy.contains('h4', 'Inner INNER Disclosure Title').should('be.visible')
         }
     },
     DisclosureWidget: {
