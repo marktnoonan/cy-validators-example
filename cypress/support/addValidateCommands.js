@@ -1,8 +1,7 @@
 /* eslint-disable no-undef */
 import { validators } from '../../src/components/validators.js'
 
-const defaultOptions = { selector: '', props: {}, scopeToComponentName: true }
-
+const defaultOptions = { selector: '', should: 'exist', props: {}, scopeToComponentName: true }
 
 export function addValidateCommands() {
   Cypress.Commands.add('validate', (name, stateOrOptions, options) => {
@@ -35,6 +34,8 @@ export function addValidateCommands() {
       if (resolvedOptions.depth > 0) {
         resolvedOptions.depth--
       } else {
+        cy.getCyComponent(name, resolvedOptions.selector)
+          .should(resolvedOptions.should)
         cy.log('depth limit reached')
         return
       }
@@ -44,20 +45,18 @@ export function addValidateCommands() {
     if (resolvedOptions.scopeToComponentName === false) {
       return validatorFn(resolvedOptions)
     }
-    
 
     return cy.getCyComponent(name, resolvedOptions.selector)
-            .should('exist') // this assertion is useful for depth === 1, in case there are no internal top-level assertions 
-            .as('component') 
-            .within(() => validatorFn({...resolvedOptions, component: cy.get('@component')}))
+      .as('component')
+      .within(() => validatorFn({ ...resolvedOptions, component: cy.get('@component') }))
   })
 
   Cypress.Commands.add('getCyComponent', (nameOrElement, selector) => {
-    if (typeof nameOrElement === 'string') {      
+    if (typeof nameOrElement === 'string') {
       if (!selector) {
-        return cy.get(`[data-cy-component=${nameOrElement}]`)
+        return cy.get(`[data-cy-component="${nameOrElement}"]`)
       }
-      return cy.get(`[data-cy-component=${nameOrElement}]`).filter(selector)
+      return cy.get(`[data-cy-component="${nameOrElement}"]`).filter(selector)
     } else {
       return nameOrElement.closest('[data-cy-component]')
     }

@@ -12,7 +12,7 @@
 
    <DisclosureWidget class="widget">
      <template #title>For some interactivity, check this out</template>
-     I am a details element being awesome.
+     I am a Disclosure Widget being awesome.
    </DisclosureWidget>
   </div>
 </template>

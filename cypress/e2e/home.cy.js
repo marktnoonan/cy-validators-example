@@ -9,8 +9,7 @@ describe('the homepage', () => {
     it('renders expected contents on successful visit', () => {
         cy.visit('/')
         cy.validate('App', 'loading')
-        cy.validate('HeaderBar', { props: { activeItemName: 'Home' } })
-        cy.validate('HelloWorld', { props: { title: 'Welcome to Your Vue.js App' } })
+        cy.validate('App')
     })
 })
 
