@@ -58,7 +58,7 @@ export const validators = {
     },
     HelloListItem: {
         defaultRender(options) {
-            const {component} = options
+            const { component } = options
             component.should('have.prop', 'nodeName', 'LI')
 
             const { name, href, active } = options.props
@@ -71,7 +71,7 @@ export const validators = {
             } else {
                 component.filter(':not(.active)').should('contain', name)
             }
-       
+
             // check the item exists, and has a link with the right content and href
             cy.contains('a', name)
                 .should('be.visible')
@@ -101,18 +101,7 @@ export const validators = {
         defaultRender() {
             cy.contains('For a guide and recipes on how to configure / customize this project, check out the vue-cli documentation.').should('be.visible')
             cy.contains('a', 'vue-cli documentation').should('have.attr', 'href', 'https://cli.vuejs.org')
-
-            cy.contains('I am a details element being awesome.')
-                .as('detailsElement')
-                .should('not.have.attr', 'open')
-
-            cy.contains('For some interactivity, check this out')
-                .as('summaryElement')
-                .click()
-
-            cy.get('@detailsElement').should('have.attr', 'open')
-            cy.get('@summaryElement').click()
-            cy.get('@detailsElement').should('not.have.attr', 'open')
+            cy.validate('DisclosureWidget', { props: { title: 'For some interactivity, check this out', body: 'I am a details element being awesome.' } })
         }
     },
     ErrorMessage: {
@@ -125,6 +114,7 @@ export const validators = {
     HeaderBar: {
         defaultRender(options) {
             const { activeItemName } = options.props
+            requireTruthy('activeItemName', options)
             const items = [{
                 name: 'Home',
                 href: '#/',
@@ -134,13 +124,11 @@ export const validators = {
                 href: '#/other-place'
             }]
 
-            if (activeItemName) {
-                const shouldBeActive = items.findIndex((item) => item.name === activeItemName)
-                if (shouldBeActive === -1) {
-                    throw new Error(`No nav item found with name matching ${activeItemName}`)
-                }
-                items[shouldBeActive].active = true
+            const shouldBeActive = items.findIndex((item) => item.name === activeItemName)
+            if (shouldBeActive === -1) {
+                throw new Error(`No nav item found with name matching ${activeItemName}`)
             }
+            items[shouldBeActive].active = true
             cy.validate('HelloList', mergeOptions(options, { props: { items } }))
         }
     },

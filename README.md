@@ -27,6 +27,8 @@ This is why the `home.cy.js` test can be 2 lines long, but still check every ima
 Let's use the classic Arrange, Act, and Assert language to show what E2E Specs, Component Specs, and Validators are responsible for when used in this way.
 ### Component Validators
 
+These are guidelines, break them if needed. Maybe comment explaining why you need to break them.
+
 Do:
 
 - ✅ ASSERT (direct): Make __assertions about the DOM__ directly rendered by that component in that state
@@ -83,12 +85,20 @@ TODO: more details about testing that components _don't_ appear, avoiding scopin
 Topics to cover:
 
 - Use of slots / Nested uses of the same component (related to slots)
-- Component Testing with a router
+- Component Testing with a router - especially the real router
 - Depth of full validations / Existence checks
 - Multiple instances of same component on a page / Identifying specific instances with data-cy
 - Refactoring - change code, keep selectors, tests should still pass, then update tests.
 - Reporting - can we buildup a log of what parts of the component tree were tested?
 - Tooling - using `$0.closest('[data-cy-component]').dataset.cyComponent` to show component names in various places like playground
+
+Shenanigans:
+
+- data-cy-component
+- grabbing the top-level component element
+- conditionals within states (eg, active vs inactive) header nav items - make new state fn or fork assertions within a given state?
+- hover/focus states etc.
+- explain `mergeOptions` and/or find a better name for it, or find a way to do this from `cy.validate` and not have to pass things
 
 ## Project setup
 ```

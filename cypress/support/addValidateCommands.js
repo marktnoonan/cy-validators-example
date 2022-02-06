@@ -53,8 +53,7 @@ export function addValidateCommands() {
   })
 
   Cypress.Commands.add('getCyComponent', (nameOrElement, selector) => {
-    if (typeof nameOrElement === 'string') {
-      
+    if (typeof nameOrElement === 'string') {      
       if (!selector) {
         return cy.get(`[data-cy-component=${nameOrElement}]`)
       }

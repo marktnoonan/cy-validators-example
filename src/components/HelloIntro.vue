@@ -10,14 +10,19 @@
       >vue-cli documentation</a>.
     </p>
 
-    <details>
-      <summary>For some interactivity, check this out</summary>I am a details element being awesome.
-    </details>
+   <DisclosureWidget>
+     <template #title>For some interactivity, check this out</template>
+     I am a details element being awesome.
+   </DisclosureWidget>
   </div>
 </template>
 
 <script>
+import DisclosureWidget from "./DisclosureWidget.vue"
 export default {
   name: 'HelloIntro',
+  components: {
+    DisclosureWidget
+  }
 }
 </script>
