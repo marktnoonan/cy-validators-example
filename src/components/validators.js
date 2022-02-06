@@ -58,39 +58,28 @@ export const validators = {
     },
     HelloListItem: {
         defaultRender(options) {
-            options.component.should('have.prop', 'nodeName', 'LI')
+            const {component} = options
+            component.should('have.prop', 'nodeName', 'LI')
 
             const { name, href, active } = options.props
 
             requireTruthy('name', options)
             requireTruthy('href', options)
+
+            if (active) {
+                component.filter('.active').should('contain', name)
+            } else {
+                component.filter(':not(.active)').should('contain', name)
+            }
+       
             // check the item exists, and has a link with the right content and href
             cy.contains('a', name)
                 .should('be.visible')
                 .and('have.attr', 'href', href)
-
-            if (active) {
-                cy.contains('a', name)
-                    .closest('.active')
-                    .should('exist')
-            } else {
-                cy.contains('a', name)
-                    .closest('.active')
-                    .should('not.exist')
-            }
         },
         noContent(options) {
             cy.get(`${options.selector} li`).should('not.exist')
         },
-        active() {
-            // this is a real bare bones assertion
-            // but we just want to know if, inside this component
-            // _something_ is active. The defaultRender checks 
-            // that this class isn't found in the default state.
-            // Checking CSS classes is not great, but this is just an
-            // example of state to inspect
-            cy.get('.active')
-        }
     },
     HelloList: {
         defaultRender(options) {
@@ -138,7 +127,7 @@ export const validators = {
             const { activeItemName } = options.props
             const items = [{
                 name: 'Home',
-                href: '#/'
+                href: '#/',
             },
             {
                 name: 'Some other place',
@@ -182,9 +171,6 @@ export const validators = {
 
             cy.contains(body)
                 .should('not.have.attr', 'open')
-
-
-
         }
     }
 }

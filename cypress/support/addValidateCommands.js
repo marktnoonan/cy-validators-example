@@ -44,20 +44,21 @@ export function addValidateCommands() {
     if (resolvedOptions.scopeToComponentName === false) {
       return validatorFn(resolvedOptions)
     }
-
-    // we search within the component's parent because sometimes the validator
-    // will contain assertions about the top level element itself.
-    // This could be better, might be unintuitive in some situations.
+    
 
     return cy.getCyComponent(name, resolvedOptions.selector)
-            .should('exist')
-            .as('component')
+            .should('exist') // this assertion is useful for depth === 1, in case there are no internal top-level assertions 
+            .as('component') 
             .within(() => validatorFn({...resolvedOptions, component: cy.get('@component')}))
   })
 
-  Cypress.Commands.add('getCyComponent', (nameOrElement, selector = '') => {
+  Cypress.Commands.add('getCyComponent', (nameOrElement, selector) => {
     if (typeof nameOrElement === 'string') {
-      return cy.get(`${selector}[data-cy-component=${nameOrElement}]`)
+      
+      if (!selector) {
+        return cy.get(`[data-cy-component=${nameOrElement}]`)
+      }
+      return cy.get(`[data-cy-component=${nameOrElement}]`).filter(selector)
     } else {
       return nameOrElement.closest('[data-cy-component]')
     }
