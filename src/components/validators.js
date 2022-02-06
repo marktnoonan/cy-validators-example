@@ -146,21 +146,21 @@ export const validators = {
             requireTruthy('title', options)
             requireTruthy('body', options)
 
-            cy.contains('summary', title)
-                .as('summary')
+            cy.contains('button', title)
+                .as('trigger')
                 .should('be.visible')
 
-            cy.get('@summary')
-                .click()
-
-            cy.contains('details', body)
-                .should('have.attr', 'open')
-
-            cy.get('@summary')
+            cy.get('@trigger')
                 .click()
 
             cy.contains(body)
-                .should('not.have.attr', 'open')
+                .should('be.visible')
+
+            cy.get('@trigger')
+                .click()
+
+            cy.contains(body)
+                .should('not.be.visible')
         }
     }
 }
