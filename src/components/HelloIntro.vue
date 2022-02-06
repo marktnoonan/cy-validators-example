@@ -10,7 +10,7 @@
       >vue-cli documentation</a>.
     </p>
 
-   <DisclosureWidget>
+   <DisclosureWidget class="widget">
      <template #title>For some interactivity, check this out</template>
      I am a details element being awesome.
    </DisclosureWidget>
@@ -26,3 +26,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.widget {
+  margin: 0 auto;
+}
+</style>
