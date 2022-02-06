@@ -11,7 +11,7 @@ export const listItems = {
       { name: 'News', href: 'https://news.vuejs.org' },
     ],
     ecosystem: [
-      { name: 'https://router.vuejs.org', href: 'vue-router' },
+      { name: 'vue-router', href: 'https://router.vuejs.org' },
       { name: 'vuex', href: 'https://vuex.vuejs.org' },
       { name: 'vue-devtools', href: 'https://github.com/vuejs/vue-devtools#vue-devtools' },
       { name: 'vue-loader', href: 'https://vue-loader.vuejs.org' },

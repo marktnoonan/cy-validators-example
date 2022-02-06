@@ -18,53 +18,71 @@ This repo is an example of how this might work. Component tests are a responsibl
 
 Since the validators themselves are just regular Cypress code, they can make DOM assertions and click around, but also use the `cy.validate` command to assert the expected state of direct child components of the component being tested. In this way, tests of higher level component, and even E2E tests, can fully check the validity of the entire component tree, starting at any given node in that tree, without duplicating a single assertion or interaction in the code.
 
-This is why the `home.cy.js` test can be 2 lines long, but still check every image, title, link, and interactive element on the page.
+This is why the `home.cy.js` test can be just a fwe lines long, but still check every image, title, link, and interactive element on the page. And of course, we don't need to check the entire component tree all the time, on every page. So there are ways to be more specific about what to check and how deep to go.
 
 ---
 
 ## Recommendations
 
-Let's use the classic Arrange, Act, and Assert language to show what E2E Specs, Component Specs, and Validators are responsible for when used in this way.
-### Component Validators
-
+Let's use the classic Arrange, Act, and Assert language to show what E2E Specs, Component Specs, and Validators are responsible for when used in this way. 
 These are guidelines, break them if needed. Maybe comment explaining why you need to break them.
+### Component Validators
 
 Do:
 
-- ✅ ASSERT (direct): Make __assertions about the DOM__ directly rendered by that component in that state
-- ✅ ACT & ASSERT (direct): Perform any UI actions that should be possible in that state and assert they worked. Assert that __unwanted actions can't be performed__ (disabled buttons, double clicking same button, etc).
-- ✅ ACT & ASSERT (indirect): Call the validators for all direct child components, using the `props` in the `options` object to set any data controlled by the current Spec.
+- ✅ ASSERT: Make __assertions about the DOM__ directly rendered by that component in that state
+- ✅ ACT & ASSERT: Perform any UI actions that should be possible in that state and assert they worked. Assert that __unwanted actions can't be performed__ (disabled buttons, double clicking same button, etc).
+- ✅ ACT & ASSERT: Call the validators for all direct child components, using the `props` in the `options` object to set any data controlled by the current Spec.
 
 Don't:
 
 - ⛔️ ARRANGE: Never use a component's API in a validator, we are already checking a specific state that's been set up by other means. Props, events, etc should be touched in __that component's spec file__.
 - ⛔️ ASSERT: In a component validator, don't assert the state any descendent components directly, instead, use the existing validators for the direct child components, describing the expected state. Only make assertions about, and interact directly with, DOM elements directly rendered by (or "owned" by) the component under test. The whole rest of the component tree will be validated through these parent-child relationships.
 
+Notes: 
+
+By default, component validators are scoped to run commands against the DOM __within__ a component. The top level element (the one with the `data-cy-component` attribute) itself is outside the scope of your regular commands and assertions in a validator. That layer is available in validators as `component` in your `options` object. Validators can also be called with `scopeToComponentName: false` in the `options` to skip this completely.
+
 ### Component Specs
 
 Dos:
 
-- ✅ ARRANGE (direct): Use the __component's API__ (props, slots, etc) to set up each state of the component to be tested
-- ✅ ACT & ASSERT (indirect): Call the __validator__ for that state
-- ✅ ACT & ASSERT (direct): Test any __events__ that are supposed to be emitted, using `cy.spy()` on event handlers, or, if needed with framework-specific hooks
+- ✅ ARRANGE: Use the __component's API__ (props, slots, etc) to set up each state of the component to be tested
+- ✅ ACT & ASSERT: Call the __validator__ for that state
+- ✅ ACT & ASSERT: Test any __events__ that are supposed to be emitted, using `cy.spy()` on event handlers, or, if needed with framework-specific hooks
 
 Don't:
 
 - ⛔️ ARRANGE: Never access the __instance__ of any component other than the component under test. If a descendant component needs to be in a particular state, we should reach it the same way a user would, or through intercepts/fixtures/options passed that lead to that state. Setting/checking a child component __partially reimplements the isolated component spec__ for that component, but what we want tp validate from a parent component is not the child's behavior in isolation, but that __the component is used correctly by other components__.
 
+Notes:
 
+If your test is checking static content, try to pull it from your actual data source for that content if you can, or modify your setup to share content between tests and application code. If your components have dependencies on your store or router, passing in your real store or router, not a mock. Although, if it's possible, it's sometimes good hint that maybe you can uncouple your components from their data sources by using some indirect layer like a composable or data-provider component, which makes isolated testing of behavior a little easier.
+
+Sometimes the component spec might end up testing things that are better managed in the component itself. A good example is checking the correctness of a link's format, the way `HelloListItem` is testing in this repo. We want to fail if consuming components don't pass proper links. But it would be better if the component itself checks the props and throws an error when bad links are passed, then our tests can confirm this error happens.
+
+In general component specs are a good place to try impossible combinations of props, see the results, and then modify the component to prevent the impossible combinations by giving feedback to the developer at the point of use, not later, when the tests are run. It's not ideal if the component spec is the only place that knows a particular "rule" about the component's usage, and writing component specs can be a good way to notice that the component's API could be more informative about what is permitted and what is not.
 ### End-to-End Specs
 
 Do:
 
-- ✅ ARRANGE (direct): Use `cy.visit()` to visit a page of the running app. Use tools like `cy.intercept()`, "shortcuts" like [App Actions](https://applitools.com/blog/page-objects-app-actions-cypress/) to put the app into the desired states.
-- ✅ ACT & ASSERT (direct): Test anything about the page that's not possible in a component test, for whatever reason. It shouldn't be much, but it depends on the app.
-- ✅ ACT & ASSERT (indirect): Call the validators for all top level components on the page. This will often be just one component. Pass in any non-static data that internal components don't request on on their own via `props` in the validators `options` parameter.
+- ✅ ARRANGE: Use `cy.visit()` to visit a page of the running app. Use tools like `cy.intercept()`, "shortcuts" like [App Actions](https://applitools.com/blog/page-objects-app-actions-cypress/) to put the app into the desired states.
+- ✅ ACT & ASSERT: Test anything about the page that's not possible in a component test, for whatever reason. It shouldn't be much, but it depends on the app.
+- ✅ ACT & ASSERT: Call the validators for all top level components on the page. This will often be just one component. Pass in any non-static data that internal components don't request on on their own via `props` in the validators `options` parameter.
 
 Don't:
 
 - ⛔️ ASSERT: Don't add assertions about parts of the DOM rendered by a component. Add those assertions to the appropriate state validation for that component, with `props` to pass if need be. If it seems like a state is missing, add the state as a validation of that component. The goal is that no component state is _possible_ in the UI that isn't asserted about in a component test.
 
+Notes:
+
+This might be the layer at which you start having multiple instances of the same components on pages. For extra confidence that you are targeting the right instance of a component, you can use the trusty old `data-cy` or `data-test` attribute, and pass it as a `selector` in the `cy.validate` `options` object. For example:
+
+```js
+cy.validate('CommonCard', { selector: '[data-cy="promo-card-0"]', props: { cardTitle: 'New Offer' } })
+```
+
+This will run the validator against that particular `promo-card-0` instance of a `CommonCard` component on the page, and confirm the title says "New Offer" in that card. This would avoid, say, matching a different card on the page that happened to contain this same string.
 
 ### General
 

@@ -75,7 +75,10 @@ export const validators = {
             // check the item exists, and has a link with the right content and href
             cy.contains('a', name)
                 .should('be.visible')
-                .and('have.attr', 'href', href)
+                .within(($el) => {
+                    expect($el.attr('href')).to.eq(href)
+                    .and.satisfy(href => href.startsWith('/') || href.startsWith('#') || href.startsWith('http'))
+                })
         },
         noContent(options) {
             cy.get(`${options.selector} li`).should('not.exist')
