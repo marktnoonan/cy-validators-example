@@ -67,7 +67,7 @@ Do:
 
 - ✅ ARRANGE: Use `cy.visit()` to visit a page of the running app. Use tools like `cy.intercept()`, "shortcuts" like [App Actions](https://applitools.com/blog/page-objects-app-actions-cypress/) to put the app into the desired states.
 - ✅ ACT & ASSERT: Test anything about the page that's not possible in a component test, for whatever reason. It shouldn't be much, but it depends on the app.
-- ✅ ACT & ASSERT: Call the validators for all top level components on the page. This will often be just one component. Pass in any non-static data that internal components don't request on on their own via `props` in the validators `options` parameter.
+- ✅ ACT & ASSERT: Call the validators for components on the page that you are testing. This can be just one component - e.g. "validate the whole tree from the root App component". But it can also be more surgical, "validate the 'signup' flow for this user type" without re-testing the app header and footer. Pass in any non-static data that internal components need via `props` in the validators `options` parameter.
 
 Don't:
 
