@@ -6,7 +6,7 @@ Component validators are reusable snippets of Cypress test code. At the smallest
 
 ## Background
 
-Components exist in a hierarchy. There are architectural components like layouts, small utility components act as basic building blocks, as well as larger components that are directly recognizable in a design system. 
+Components exist in a hierarchy. There are architectural components like layouts, small utility components act as basic building blocks, as well as in-between components that are directly recognizable in a design system. 
 
 As the levels of nesting and complexity increase in a component-based application, component tests can become difficult to manage, and it can feel like things like test setup and assertions start be duplicated at multiple layers of the system.
 
