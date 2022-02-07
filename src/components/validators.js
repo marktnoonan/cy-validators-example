@@ -226,7 +226,7 @@ export const validators = {
             requireTruthy('title', options)
             requireTruthy('body', options)
 
-            // just open and close this thing and see if it has the expected title contents
+            // just open and close this thing and see if it has the expected title and contents
             cy.contains('button', title)
                 .as('trigger')
                 .should('be.visible')
