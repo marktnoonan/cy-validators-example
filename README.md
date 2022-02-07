@@ -18,7 +18,7 @@ This repo is an example of how this might work. Component tests are a responsibl
 
 Since the validators themselves are just regular Cypress code, they can make DOM assertions and click around, but also use the `cy.validate` command to assert the expected state of direct child components of the component being tested. In this way, tests of higher level component, and even E2E tests, can fully check the validity of the entire component tree, starting at any given node in that tree, without duplicating a single assertion or interaction in the code.
 
-This is why the `home.cy.js` test can be just a fwe lines long, but still check every image, title, link, and interactive element on the page. And of course, we don't need to check the entire component tree all the time, on every page. So there are ways to be more specific about what to check and how deep to go.
+This is why the `home.cy.js` test can be just a few lines long, but still check every image, title, link, and interactive element on the page. And of course, we don't need to check the entire component tree all the time, on every page. So there are ways to be more specific about what to check and how deep to go.
 
 ---
 
