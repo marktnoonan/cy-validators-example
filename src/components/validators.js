@@ -50,24 +50,24 @@ export const validators = {
             // on the new route, OtherPlace view should be visible now
             // but we don't need to check the whole tree, just check
             // that the page-level components we expect are present or not
-            cy.getCyComponent('OtherPlace').should('be.visible')
-            cy.getCyComponent('HelloWorld').should('not.exist')
+            cy.getComponent('OtherPlace').should('be.visible')
+            cy.getComponent('HelloWorld').should('not.exist')
 
             // go back to home page
             cy.contains('Home').click()
 
             // again, we don't need to check the whole tree again, just makes sure the transition
             // worked, we should see HelloWord page again, and OtherPlace is gone
-            cy.getCyComponent('HelloWorld').should('be.visible')
-            cy.getCyComponent('OtherPlace').should('not.exist')
+            cy.getComponent('HelloWorld').should('be.visible')
+            cy.getComponent('OtherPlace').should('not.exist')
         },
         loading() {
             // in loading state, we should see the message
             cy.contains('p', 'Pretending to load...').should('be.visible')
 
             // the page components should not exist at all in the App loading state
-            cy.getCyComponent('HelloWorld').should('not.exist')
-            cy.getCyComponent('OtherPlace').should('not.exist')
+            cy.getComponent('HelloWorld').should('not.exist')
+            cy.getComponent('OtherPlace').should('not.exist')
         }
     },
     HelloWorld: {
@@ -95,7 +95,7 @@ export const validators = {
             cy.validate('HelloList', extendOptions(options, { props: { items: listItems.ecosystem } }))
 
             // with no content, the list wrapper shouldn't render, so make sure that data-cy attribute is not found
-            cy.getCyComponent('HelloList', { selector: 'data-cy="no-content-list"' }).should('not.exist')
+            cy.getComponent('HelloList', { selector: 'data-cy="no-content-list"' }).should('not.exist')
         },
     },
     HelloListItem: {

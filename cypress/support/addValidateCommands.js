@@ -34,19 +34,19 @@ export function addValidateCommands() {
       if (resolvedOptions.depth > 0) {
         resolvedOptions.depth--
       } else {
-        cy.getCyComponent(name, resolvedOptions.selector)
+        cy.getComponent(name, resolvedOptions.selector)
           .should(resolvedOptions.should)
         cy.log('depth limit reached')
         return
       }
     }
 
-    return cy.getCyComponent(name, resolvedOptions.selector)
+    return cy.getComponent(name, resolvedOptions.selector)
       .as('component')
       .within(() => validatorFn({ ...resolvedOptions, component: cy.get('@component') }))
   })
 
-  Cypress.Commands.add('getCyComponent', (nameOrElement, selector) => {
+  Cypress.Commands.add('getComponent', (nameOrElement, selector) => {
     if (typeof nameOrElement === 'string') {
       if (!selector) {
         return cy.get(`[data-cy-component="${nameOrElement}"]`)

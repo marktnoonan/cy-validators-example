@@ -103,7 +103,7 @@ TODO: more details about testing that components _don't_ appear, avoiding scopin
 
 In this project, I've customized the behavior of the selector playground so that for `cy.get()` it will give you the selector for the component that owns the element you click. This selector is not intended to be used directly in specs (validators handle this) but it will tell you which validator to use if you want to assert about a specific element. 
 
-Of course, this breaks the expected behavior of `cy.get()` in the playground, so it's just an example. In theory, the playground could know about the `data-cy-component` attribute and we wouldn't take over `cy.get()`'s playground behavior, we'd have a `cy.getCyComponent()` option that uses the component name to create something like `cy.getCyComponent('ListItem')` when you click on something where ListItem is the closest parent component.
+Of course, this breaks the expected behavior of `cy.get()` in the playground, so it's just an example. In theory, the playground could know about the `data-cy-component` attribute and we wouldn't take over `cy.get()`'s playground behavior, we'd have a `cy.getComponent()` option that uses the component name to create something like `cy.getComponent('ListItem')` when you click on something where ListItem is the closest parent component.
 
 Other topics to cover:
 

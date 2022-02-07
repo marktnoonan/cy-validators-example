@@ -4,7 +4,7 @@ describe('the homepage', () => {
         cy.visit('/#/?test=ohno')
         cy.validate('App', 'loading')
         cy.validate('ErrorMessage', {props: {message: 'No query params, please!'}})
-        cy.getCyComponent('HelloWorld').should('not.exist')
+        cy.getComponent('HelloWorld').should('not.exist')
     })
     it('renders expected contents on successful visit', () => {
         cy.visit('/')
