@@ -19,10 +19,6 @@ export function addValidateCommands() {
 
     const validatorFn = validators[name]?.[resolvedState]
 
-    if (prevComponentName === name) {
-      return validatorFn(resolvedOptions)
-    }
-
     // send a helpful error if validator can't be found
     if (!validatorFn) {
       throw new Error(`No component validator found for ${resolvedState} state of ${name} component`)
@@ -45,6 +41,13 @@ export function addValidateCommands() {
         cy.log('depth limit reached')
         return
       }
+    }
+
+    // if the component name is the same, we are
+    // already running commands `within` the component 
+    // scoping further won't work
+    if (prevComponentName === name) {
+      return validatorFn(resolvedOptions)
     }
 
     return cy.getComponent(name, resolvedOptions.selector)
