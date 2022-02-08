@@ -11,11 +11,17 @@ export function addValidateCommands() {
     const resolvedOptions = typeof stateOrOptions === 'object' ?
       { ...defaultOptions, ...stateOrOptions } :
       { ...defaultOptions, ...options }
-
+  
+    const prevComponentName = resolvedOptions.meta?.componentName
     // always reset meta, if options were passed through from another validator
     // we still want the current validator's name and state added for error messages
     resolvedOptions.meta = { componentName: name, state: resolvedState }
+
     const validatorFn = validators[name]?.[resolvedState]
+
+    if (prevComponentName === name) {
+      return validatorFn(resolvedOptions)
+    }
 
     // send a helpful error if validator can't be found
     if (!validatorFn) {
@@ -43,7 +49,10 @@ export function addValidateCommands() {
 
     return cy.getComponent(name, resolvedOptions.selector)
       .as('component')
-      .within(() => validatorFn({ ...resolvedOptions, component: cy.get('@component') }))
+      .within(() => {
+        resolvedOptions.component = cy.get('@component')
+        validatorFn(resolvedOptions)
+      })
   })
 
   Cypress.Commands.add('getComponent', (nameOrElement, selector) => {
