@@ -10,7 +10,7 @@ describe('<HeaderBar />', { viewportHeight: 80, viewportWidth: 800 }, () => {
         plugins: [router]
       }
     })
-    cy.validate(HeaderBar.name, { props: { activeItemName: 'Home' } })
+    cy.validate(HeaderBar.name, { testData: { activeItemName: 'Home' } })
   })
 
 })

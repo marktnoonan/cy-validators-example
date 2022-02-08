@@ -5,7 +5,7 @@ import DisclosureWidget from "./DisclosureWidget.vue"
 describe('<DisclosureWidget />', { viewportHeight: 300, viewportWidth: 300 }, () => {
   it('renders when no slots are used', () => {
     cy.mount(<DisclosureWidget />)
-    cy.validate(DisclosureWidget.name, { props: { title: 'Untitled Disclosure', body: 'Panel with no details' } })
+    cy.validate(DisclosureWidget.name, { testData: { title: 'Untitled Disclosure', body: 'Panel with no details' } })
   })
 
   it('renders slot content', () => {
@@ -15,6 +15,6 @@ describe('<DisclosureWidget />', { viewportHeight: 300, viewportWidth: 300 }, ()
       }}>
       Test body
     </DisclosureWidget>)
-    cy.validate(DisclosureWidget.name, { props: { title: 'Test Title', body: 'Test body' } })
+    cy.validate(DisclosureWidget.name, { testData: { title: 'Test Title', body: 'Test body' } })
   })
 })

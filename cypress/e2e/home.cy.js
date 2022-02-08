@@ -3,7 +3,7 @@ describe('the homepage', () => {
     it('renders error if a query param is passed', () => {
         cy.visit('/#/?test=ohno')
         cy.validate('App', 'loading')
-        cy.validate('ErrorMessage', {props: {message: 'No query params, please!'}})
+        cy.validate('ErrorMessage', {testData: {message: 'No query params, please!'}})
         cy.getComponent('HelloWorld').should('not.exist')
     })
     it('renders expected contents on successful visit', () => {
@@ -38,4 +38,4 @@ describe('the homepage', () => {
 // The application should still go through the loading state, and then reach the error state.
 // This code passes down the expected Error message, and the App error state validator will know what to do with it:
 //
-//  cy.validate('App', 'error', {props: {message: 'No query params, please!'}})
+//  cy.validate('App', 'error', {testData: {message: 'No query params, please!'}})

@@ -27,7 +27,7 @@ export const validators = {
         defaultRender(options) {
 
             // validate the entire component tree of HeaderBar
-            cy.validate('HeaderBar', extendOptions(options, { props: { activeItemName: 'Home' } }))
+            cy.validate('HeaderBar', extendOptions(options, { testData: { activeItemName: 'Home' } }))
 
             // check some DOM elements directly owned by App
             cy.contains('Pretending to load...')
@@ -38,14 +38,14 @@ export const validators = {
                 .and('have.length', 2)
 
             // validate the entire component tree of HelloWorld
-            cy.validate('HelloWorld', { props: { title: 'Welcome to Your Vue.js App' } })
+            cy.validate('HelloWorld', { testData: { title: 'Welcome to Your Vue.js App' } })
 
             // validate navigation
             cy.contains('Some other place').click()
 
             // we expect a change in HeaderBar state after changing routes, 
             // so revalidate now with the new expected "active" item
-            cy.validate('HeaderBar', extendOptions(options, { props: { activeItemName: 'Some other place' } }))
+            cy.validate('HeaderBar', extendOptions(options, { testData: { activeItemName: 'Some other place' } }))
 
             // on the new route, OtherPlace view should be visible now
             // but we don't need to check the whole tree, just check
@@ -73,7 +73,7 @@ export const validators = {
     HelloWorld: {
         defaultRender(options) {
             // title is not static in HelloWorld so we need to get it from `options`
-            const { title } = options.props
+            const { title } = options.testData
 
             // if we don't have a title prop, throw an error and explain
             requireTruthy('title', options)
@@ -90,9 +90,9 @@ export const validators = {
             // we have the same list multiple places, but with different sets of items
             // pass in the expected array for each list, using `extendOptions` to merge
             // with options we are passing down
-            cy.validate('HelloList', extendOptions(options, { props: { items: listItems.CLI } }))
-            cy.validate('HelloList', extendOptions(options, { props: { items: listItems.essentialLinks } }))
-            cy.validate('HelloList', extendOptions(options, { props: { items: listItems.ecosystem } }))
+            cy.validate('HelloList', extendOptions(options, { testData: { items: listItems.CLI } }))
+            cy.validate('HelloList', extendOptions(options, { testData: { items: listItems.essentialLinks } }))
+            cy.validate('HelloList', extendOptions(options, { testData: { items: listItems.ecosystem } }))
 
             // with no content, the list wrapper shouldn't render, so make sure that data-cy attribute is not found
             cy.getComponent('HelloList', { selector: 'data-cy="no-content-list"' }).should('not.exist')
@@ -107,7 +107,7 @@ export const validators = {
             // we might want to assert something about the root itself, so here's a way to access it
             component.should('have.prop', 'nodeName', 'LI')
 
-            const { name, href, active } = options.props
+            const { name, href, active } = options.testData
 
             requireTruthy('name', options)
             requireTruthy('href', options)
@@ -133,7 +133,7 @@ export const validators = {
     },
     HelloList: {
         defaultRender(options) {
-            const { items } = options?.props
+            const { items } = options?.testData
             requireTruthy('items', options)
 
             // check this component renders a semantic UL element
@@ -141,7 +141,7 @@ export const validators = {
 
             // and use the HelloListItem validator to check each expected item
             items.forEach(item => {
-                cy.validate('HelloListItem', extendOptions(options, { props: { name: item.name, href: item.href, active: item.active } }))
+                cy.validate('HelloListItem', extendOptions(options, { testData: { name: item.name, href: item.href, active: item.active } }))
             });
         },
     },
@@ -153,12 +153,12 @@ export const validators = {
 
             // HelloIntro renders a disclosure widget, using slots to pass in the content,
             // so let's validate that the content was passed in properly and DisclosureWidget does what we expect
-            cy.validate('DisclosureWidget', { props: { title: 'For some interactivity, check this out', body: 'I am a Disclosure Widget being awesome.' } })
+            cy.validate('DisclosureWidget', { testData: { title: 'For some interactivity, check this out', body: 'I am a Disclosure Widget being awesome.' } })
         }
     },
     ErrorMessage: {
         defaultRender(options) {
-            const { message } = options.props
+            const { message } = options.testData
             requireTruthy('message', options)
 
             // just make sure the error text shows up
@@ -170,7 +170,7 @@ export const validators = {
             // in all situations, check the image
             cy.get('img').should('have.attr', 'alt', 'Vue logo')
 
-            const { activeItemName } = options.props
+            const { activeItemName } = options.testData
 
             // require an active item name, since there's no valid
             // case where HeaderBar does not have one active item
@@ -198,7 +198,7 @@ export const validators = {
             items[shouldBeActive].active = true
 
             // now with the items all set up, validate the list
-            cy.validate('HelloList', extendOptions(options, { props: { items } }))
+            cy.validate('HelloList', extendOptions(options, { testData: { items } }))
         }
     },
     OtherPlace: {
@@ -211,17 +211,17 @@ export const validators = {
             // OtherPlace owns that HTML, so this is where to validate it
 
             cy.contains('h1', 'Some Other Place').should('be.visible')
-            cy.validate('DisclosureWidget', { props: { title: 'Outer Disclosure Title', body: 'Outer body' } })
+            cy.validate('DisclosureWidget', { testData: { title: 'Outer Disclosure Title', body: 'Outer body' } })
             cy.contains('h2', 'Outer Disclosure Title').click()
-            cy.validate('DisclosureWidget', { props: { title: 'Inner Disclosure Title', body: 'Inner Disclosure Body' } })
+            cy.validate('DisclosureWidget', { testData: { title: 'Inner Disclosure Title', body: 'Inner Disclosure Body' } })
             cy.contains('h3', 'Inner Disclosure Title').click()
-            cy.validate('DisclosureWidget', { props: { title: 'Inner INNER Disclosure Title', body: 'Inner INNER Disclosure Body' } })
+            cy.validate('DisclosureWidget', { testData: { title: 'Inner INNER Disclosure Title', body: 'Inner INNER Disclosure Body' } })
             cy.contains('h4', 'Inner INNER Disclosure Title').should('be.visible')
         }
     },
     DisclosureWidget: {
         defaultRender(options) {
-            const { title, body } = options.props
+            const { title, body } = options.testData
 
             requireTruthy('title', options)
             requireTruthy('body', options)
@@ -254,7 +254,7 @@ function validLinkFormat(href) {
 
 function requireTruthy(propName, options) {
     const { componentName, state } = options.meta
-    if (!options.props[propName]) {
+    if (!options.testData[propName]) {
         throw new Error(`Cannot validate __${state}__ state of __${componentName}__ component without __${propName}__ prop.`)
     }
 }

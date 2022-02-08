@@ -13,6 +13,6 @@ describe('<Helloworld />', {viewportHeight: 800, viewportWidth: 1200}, () => {
     // Pass the test title as an option to the validator.
     // The validator already knows everything else it needs to check
     // about the component because there is only static content there.
-    cy.validate(HelloWorld.name, { props: { title: testTitle } })
+    cy.validate(HelloWorld.name, { testData: { title: testTitle } })
   })
 })

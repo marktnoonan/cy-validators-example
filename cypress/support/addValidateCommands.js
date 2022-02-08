@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { validators } from '../../src/components/validators.js'
 
-const defaultOptions = { selector: '', should: 'exist', props: {} }
+const defaultOptions = { selector: '', should: 'exist', testData: {} }
 
 export function addValidateCommands() {
   Cypress.Commands.add('validate', (name, stateOrOptions, options) => {

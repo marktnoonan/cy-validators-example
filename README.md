@@ -32,7 +32,7 @@ Do:
 
 - ✅ ASSERT: Make __assertions about the DOM__ directly rendered by that component in that state
 - ✅ ACT & ASSERT: Perform any UI actions that should be possible in that state and assert they worked. Assert that __unwanted actions can't be performed__ (disabled buttons, double clicking same button, etc).
-- ✅ ACT & ASSERT: Call the validators for all direct child components, using the `props` in the `options` object to set any data controlled by the current Spec.
+- ✅ ACT & ASSERT: Call the validators for all direct child components, using the `testData` in the `options` object to set any data controlled by the current Spec.
 
 Don't:
 
@@ -67,18 +67,18 @@ Do:
 
 - ✅ ARRANGE: Use `cy.visit()` to visit a page of the running app. Use tools like `cy.intercept()`, "shortcuts" like [App Actions](https://applitools.com/blog/page-objects-app-actions-cypress/) to put the app into the desired states.
 - ✅ ACT & ASSERT: Test anything about the page that's not possible in a component test, for whatever reason. It shouldn't be much, but it depends on the app.
-- ✅ ACT & ASSERT: Call the validators for components on the page that you are testing. This can be just one component - e.g. "validate the whole tree from the root App component". But it can also be more surgical, "validate the 'signup' flow for this user type" without re-testing the app header and footer. Pass in any non-static data that internal components need via `props` in the validators `options` parameter.
+- ✅ ACT & ASSERT: Call the validators for components on the page that you are testing. This can be just one component - e.g. "validate the whole tree from the root App component". But it can also be more surgical, "validate the 'signup' flow for this user type" without re-testing the app header and footer. Pass in any non-static data that internal components need via `testData` in the validators `options` parameter.
 
 Don't:
 
-- ⛔️ ASSERT: Don't add assertions about parts of the DOM rendered by a component. Add those assertions to the appropriate state validation for that component, with `props` to pass if need be. If it seems like a state is missing, add the state as a validation of that component. The goal is that no component state is _possible_ in the UI that isn't asserted about in a component test.
+- ⛔️ ASSERT: Don't add assertions about parts of the DOM rendered by a component. Add those assertions to the appropriate state validation for that component, with `testData` to pass if need be. If it seems like a state is missing, add the state as a validation of that component. The goal is that no component state is _possible_ in the UI that isn't asserted about in a component test.
 
 Notes:
 
 This might be the layer at which you start having multiple instances of the same components on pages. For extra confidence that you are targeting the right instance of a component, you can use the trusty old `data-cy` or `data-test` attribute, and pass it as a `selector` in the `cy.validate` `options` object. For example:
 
 ```js
-cy.validate('CommonCard', { selector: '[data-cy="promo-card-0"]', props: { cardTitle: 'New Offer' } })
+cy.validate('CommonCard', { selector: '[data-cy="promo-card-0"]', testData: { cardTitle: 'New Offer' } })
 ```
 
 This will run the validator against that particular `promo-card-0` instance of a `CommonCard` component on the page, and confirm the title says "New Offer" in that card. This would avoid, say, matching a different card on the page that happened to contain this same string.
@@ -90,7 +90,7 @@ Validators should be "written once, called at least twice". At minimum, we shoul
 The difference between calling, say, the `defaultRender` validator of the `HelloListItem` component from the `HelloListItem` __component spec__ and the parent `HelloList` `defaultRender` state __validator__, is in how the state is created: 
 
 - In the spec, we sets a `content` prop directly on the `ListItem` when it is mounted. It confirms the API of the component matches expectations in the `defaultRender` state - given a content object, it uses the `name` and `href` from that object to make a list item with a link to that `href`. Over time, this test ensures the shape of the Lego brick isn't changing.
-- When the `HelloList` component __validator__ for the state where a `defaultRender` is expected for `HelloListItem` is called, the `HelloList` component __spec__ has passed an array of `items` as a prop to `HelloList`. By calling `cy.validate('HelloListItem', { props: { name: item.name, href: item.href } })` for each `item` in the array, we confirm the child component was __used correctly__ by the parent - all the expected children rendered. No extra assertion code had to be written.
+- When the `HelloList` component __validator__ for the state where a `defaultRender` is expected for `HelloListItem` is called, the `HelloList` component __spec__ has passed an array of `items` as a prop to `HelloList`. By calling `cy.validate('HelloListItem', { testData: { name: item.name, href: item.href } })` for each `item` in the array, we confirm the child component was __used correctly__ by the parent - all the expected children rendered. No extra assertion code had to be written.
 
 
 ### Edges Cases, Escape Hatches, & Shenanigans

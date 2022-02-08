@@ -13,6 +13,6 @@ describe('<HelloList />',{viewportHeight: 60, viewportWidth: 400}, () => {
       { name: 'test-name-2', href: '#test-href-2' }
     ]
     cy.mount(<HelloList items={items} />)
-    cy.validate(HelloList.name, { props: {items: items }})
+    cy.validate(HelloList.name, { testData: {items }})
   })
 })
