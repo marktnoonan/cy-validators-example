@@ -141,7 +141,7 @@ export const validators = {
 
             // and use the HelloListItem validator to check each expected item
             items.forEach(item => {
-                cy.validate('HelloListItem', extendOptions(options, { testData: { name: item.name, href: item.href, active: item.active } }))
+                cy.validate('HelloListItem', extendOptions(options, { testData: item }))
             });
         },
     },
@@ -169,6 +169,8 @@ export const validators = {
         defaultRender(options) {
             // in all situations, check the image
             cy.get('img').should('have.attr', 'alt', 'Vue logo')
+
+            cy.validate('LoginForm')
 
             const { activeItemName } = options.testData
 
@@ -242,6 +244,23 @@ export const validators = {
 
             cy.contains(body)
                 .should('not.be.visible')
+        }
+    },
+    LoginForm: {
+        defaultRender(options) {
+            console.log('login form component', options.component)
+            const name = 'test name'
+            cy.contains('label', 'Name').should('be.visible')
+            cy.get('input').type(name)
+            cy.contains('button', 'Log In').click()
+            cy.validate('LoginForm', 'loggedIn', extendOptions(options, {testData: {name}}) )
+        },
+        loggedIn(options) {
+            const {name} = options.testData
+            requireTruthy('name', options)
+
+            // options.component.should('contain', `Hi ${name}!`)
+            cy.contains(`Hi ${name}!`).should('be.visible')
         }
     }
 }

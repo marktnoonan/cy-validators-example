@@ -30,5 +30,6 @@ export default {
 <style scoped>
 .widget {
   margin: 0 auto;
+  max-width: 320px;
 }
 </style>

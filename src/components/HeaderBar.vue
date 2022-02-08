@@ -1,6 +1,6 @@
 <template>
   <nav :data-cy-component="$options.name" class="nav">
-  <img class="logo" alt="Vue logo" src="../assets/logo.png" height="40" width="40" />
+    <img class="logo" alt="Vue logo" src="../assets/logo.png" height="40" width="40" />
     <HelloList
       :items="[{
         name: 'Home',
@@ -14,15 +14,19 @@
       }
       ]"
     />
+    <LoginForm />
   </nav>
 </template>
 
 <script>
 import HelloList from "./HelloList.vue"
+import LoginForm from "./LoginForm.vue"
+
 export default {
   name: 'HeaderBar',
   components: {
     HelloList,
+    LoginForm
   },
   props: {
     content: Object
@@ -39,7 +43,7 @@ export default {
   align-items: center;
 }
 
-.nav >>> [data-cy-component=HelloListItem] a {
+.nav >>> [data-cy-component="HelloListItem"] a {
   text-decoration: none;
   font-weight: bold;
 }
@@ -47,6 +51,5 @@ export default {
 .logo {
   margin-right: 20px;
 }
-
 </style>
 
