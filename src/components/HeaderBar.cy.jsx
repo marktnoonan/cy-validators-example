@@ -10,7 +10,9 @@ describe('<HeaderBar />', { viewportHeight: 80, viewportWidth: 800 }, () => {
         plugins: [router]
       }
     })
-    cy.validate(HeaderBar.name, { testData: { activeItemName: 'Home' } })
+    cy.validate(HeaderBar.name, { testData: { activeItemName: 'Home', username:'Test User' } })
+    cy.validate(HeaderBar.name, { testData: { activeItemName: 'Home', username:'Test User', doLogin: true, } })
+    cy.validate(HeaderBar.name, { testData: { activeItemName: 'Home', username:'Test User', isLoggedIn: true } })
   })
 
 })

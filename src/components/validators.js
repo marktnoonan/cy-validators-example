@@ -25,9 +25,9 @@ Structure of validators object is:
 export const validators = {
     App: {
         defaultRender(options) {
-
+            const testName = 'Linda'
             // validate the entire component tree of HeaderBar
-            cy.validate('HeaderBar', extendOptions(options, { testData: { activeItemName: 'Home' } }))
+            cy.validate('HeaderBar', extendOptions(options, { testData: { activeItemName: 'Home', name: testName } }))
 
             // check some DOM elements directly owned by App
             cy.contains('Pretending to load...')
@@ -45,7 +45,7 @@ export const validators = {
 
             // we expect a change in HeaderBar state after changing routes, 
             // so revalidate now with the new expected "active" item
-            cy.validate('HeaderBar', extendOptions(options, { testData: { activeItemName: 'Some other place' } }))
+            cy.validate('HeaderBar', extendOptions(options, { testData: { activeItemName: 'Some other place', name: test } }))
 
             // on the new route, OtherPlace view should be visible now
             // but we don't need to check the whole tree, just check
@@ -170,11 +170,19 @@ export const validators = {
             // in all situations, check the image
             cy.get('img').should('have.attr', 'alt', 'Vue logo')
 
-            const { activeItemName } = options.testData
+            const { activeItemName, username, isLoggedIn, doLogin } = options.testData
 
             // require an active item name, since there's no valid
             // case where HeaderBar does not have one active item
             requireTruthy('activeItemName', options)
+
+            if (isLoggedIn) {
+                cy.validate('LoginForm', 'loggedIn', extendOptions(options, { testData: { name: username } }))
+            } else if (doLogin) {
+                cy.validate('LoginForm', 'loginFlow', extendOptions(options, { testData: { name: username } }))
+            } else {
+                cy.validate('LoginForm')
+            }
 
             // these are static in the test for now
             // but could come from the real source of nav items in our app
@@ -186,7 +194,7 @@ export const validators = {
                 name: 'Some other place',
                 href: '#/other-place'
             }]
-            
+
             const shouldBeActive = items.findIndex((item) => item.name === activeItemName)
 
             // if the `activeItemName` does not match anything in the test data, throw an error
@@ -243,6 +251,26 @@ export const validators = {
             cy.contains(body)
                 .should('not.be.visible')
         }
+    },
+    LoginForm: {
+        defaultRender() {
+            cy.contains('label', 'Name')
+            cy.get('input')
+            cy.contains('button', 'Log In')
+        },
+        loggedIn(options) {
+            const { name } = options.testData
+            requireTruthy('name', options)
+            cy.contains(`Hi ${name}!`).should('be.visible')
+        },
+        loginFlow(options) {
+            const { name } = options.testData
+            requireTruthy('name', options)
+            cy.validate('LoginForm', options)
+            cy.get('input').type(name)
+            cy.contains('button', 'Log In').click()
+            cy.validate('LoginForm', 'loggedIn', extendOptions(options, { testData: { name } }))
+        }
     }
 }
 
@@ -254,6 +282,7 @@ function validLinkFormat(href) {
 
 function requireTruthy(propName, options) {
     const { componentName, state } = options.meta
+    console.log(options)
     if (!options.testData[propName]) {
         throw new Error(`Cannot validate __${state}__ state of __${componentName}__ component without __${propName}__ prop.`)
     }
