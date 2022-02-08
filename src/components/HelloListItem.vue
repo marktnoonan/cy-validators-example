@@ -2,7 +2,6 @@
   <li
     v-if="content"
     :data-cy-component="$options.name"
-    :data-cy="content.name"
     :class="content.active ? 'active' : ''"
   >
     <a :href="content.href">
