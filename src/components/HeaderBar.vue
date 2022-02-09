@@ -21,15 +21,19 @@
         },
       ]"
     />
+
+    <LoginForm />
   </nav>
 </template>
 
 <script>
 import HelloList from './HelloList.vue'
+import LoginForm from './LoginForm.vue'
 export default {
   name: 'HeaderBar',
   components: {
     HelloList,
+    LoginForm
   },
   props: {
     content: Object,
