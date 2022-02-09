@@ -16,5 +16,6 @@ module.exports = defineConfig({
             });
         },
         specPattern: "src/**/*.cy.{js,jsx,ts,tsx}",
+        defaultCommandTimeout: 1000
     },
 });

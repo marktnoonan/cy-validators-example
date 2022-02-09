@@ -1,6 +1,6 @@
 <template>
   <div :data-cy-component="$options.name">
-    <form class="login" @submit.prevent="handleLogin" v-if="!isLoggedIn">
+    <form class="login" @submit.prevent="handleLogin" v-if="!isLoggedIn" autocomplete="off">
       <label for="username">Name</label>
       <input type="text" id="username" v-model="username" />
       <button>Log In</button>
