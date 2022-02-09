@@ -49,7 +49,7 @@ export const validators = {
       cy.validate(
         'HeaderBar',
         extendOptions(options, {
-          testData: { activeItemName: 'Some other place' },
+          testData: { activeItemName: 'Some other place', loggedIn: true },
         })
       )
 
@@ -203,9 +203,16 @@ export const validators = {
     defaultRender(options) {
       // in all situations, check the image
       cy.get('img').should('have.attr', 'alt', 'Vue logo')
+      
+      const { activeItemName, loggedIn } = options.testData
 
-      const { activeItemName } = options.testData
-
+      if (!loggedIn) {
+        cy.validate('LoginForm', 'loginFlow')
+      } else {
+        cy.validate('LoginForm', 'loggedIn')
+      }
+      
+      
       // require an active item name, since there's no valid
       // case where HeaderBar does not have one active item
       requireTruthy('activeItemName', options)
@@ -290,6 +297,22 @@ export const validators = {
       cy.contains(body).should('not.be.visible')
     },
   },
+  LoginForm: {
+    defaultRender() {
+      cy.findByLabelText('Name').should('be.visible')
+      cy.contains('button', 'Log In').should('be.visible')
+    },
+    loginFlow(options){
+      cy.validate('LoginForm', 'defaultRender', options)
+      cy.findByLabelText('Name') .type('Frank')
+      cy.contains('button', 'Log In').click()
+      cy.validate('LoginForm', 'loggedIn', options)
+
+    },
+    loggedIn() {
+      cy.contains('Hi Frank!').should('be.visible')
+    }
+  }
 }
 
 // helpers
