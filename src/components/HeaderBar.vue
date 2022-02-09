@@ -1,6 +1,6 @@
 <template>
-<div class="nav-layout">  
-  <nav :data-cy-component="$options.name" class="nav">
+<div :data-cy-component="$options.name" class="nav-layout">  
+  <nav class="nav">
     <img
       class="logo"
       alt="Vue logo"
