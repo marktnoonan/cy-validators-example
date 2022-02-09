@@ -3,7 +3,7 @@ import App from "./App.vue"
 import router from './router'
 
 
-describe('<App />', () => {
+describe('<App />', {viewportHeight: 800, viewportWidth: 1200}, () => {
   it('renders', () => {
 
     cy.mount(<App />, {
