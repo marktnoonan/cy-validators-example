@@ -17,6 +17,7 @@
     "vue-template-compiler": "^2.6.14"
   },
   "devDependencies": {
+    "@testing-library/cypress": "^8.0.2",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
