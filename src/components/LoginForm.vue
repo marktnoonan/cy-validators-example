@@ -5,7 +5,10 @@
       <input type="text" id="username" v-model="username" />
       <button>Log In</button>
     </form>
-    <div v-else>Hi {{username}}!</div>
+    <div v-else>
+      Hi {{username}}! 
+      <button @click="handleLogout">Log Out</button>
+    </div>
   </div>
 </template>
 
@@ -22,6 +25,10 @@ export default {
     handleLogin() {
       this.isLoggedIn = true
     },
+    handleLogout() {
+      this.isLoggedIn = false
+      this.username = ''
+    }
   },
 }
 </script>

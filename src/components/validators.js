@@ -69,6 +69,17 @@ export const validators = {
       // worked, we should see HelloWord page again, and OtherPlace is gone
       cy.getComponent('HelloWorld').should('be.visible')
       cy.getComponent('OtherPlace').should('not.exist')
+
+      cy.validate('LoginForm', 'logoutFlow')
+
+      cy.validate(
+        'HeaderBar',
+        extendOptions(options, {
+          testData: {
+            activeItemName: 'Home',
+          },
+        })
+      )
     },
     loading() {
       // in loading state, we should see the message
@@ -210,9 +221,13 @@ export const validators = {
       const { activeItemName, isLoggedIn } = options.testData
 
       if (isLoggedIn) {
-        cy.validate('LoginForm', 'loggedIn', {testData: {username: 'Holly'}})
+        cy.validate('LoginForm', 'loggedIn', {
+          testData: { username: 'Holly' },
+        })
       } else {
-        cy.validate('LoginForm', 'loginFlow',  {testData: {username: 'Holly'}})
+        cy.validate('LoginForm', 'loginFlow', {
+          testData: { username: 'Holly' },
+        })
       }
 
       // require an active item name, since there's no valid
@@ -301,7 +316,7 @@ export const validators = {
   },
   LoginForm: {
     defaultRender() {
-      cy.findByLabelText('Name').should('be.visible')
+      cy.findByLabelText('Name').should('be.visible').and('have.value', '')
       cy.contains('button', 'Log In').should('be.visible')
     },
     loginFlow(options) {
@@ -319,6 +334,11 @@ export const validators = {
 
       requireTruthy('username', options)
       cy.contains(`Hi ${username}!`).should('be.visible')
+      cy.contains('button', 'Log Out').should('be.visible')
+    },
+    logoutFlow(options) {
+      cy.contains('button', 'Log Out').click()
+      cy.validate('LoginForm', options)
     },
   },
 }
