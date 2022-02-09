@@ -1,4 +1,5 @@
 <template>
+<div class="nav-layout">  
   <nav :data-cy-component="$options.name" class="nav">
     <img
       class="logo"
@@ -21,9 +22,10 @@
         },
       ]"
     />
-
-    <LoginForm />
   </nav>
+ <LoginForm />
+</div>
+
 </template>
 
 <script>
@@ -42,10 +44,16 @@ export default {
 </script>
 
 <style scoped>
-.nav {
+
+.nav-layout {
+  display: flex;
+  justify-content: space-between;
+
+  align-items: center;
   padding: 0 12px;
   border-bottom: 1px solid #ddd;
-  text-align: left;
+}
+.nav {
   display: flex;
   align-items: center;
 }
