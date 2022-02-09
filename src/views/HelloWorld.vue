@@ -14,20 +14,20 @@
 </template>
 
 <script>
-import HelloList from "../components/HelloList.vue"
-import HelloIntro from "../components/HelloIntro.vue"
-import { listItems } from "../components/list-items"
+import HelloList from '../components/HelloList.vue'
+import HelloIntro from '../components/HelloIntro.vue'
+import { listItems } from '../components/list-items'
 
 export default {
   name: 'HelloWorld',
   components: { HelloList, HelloIntro },
   props: {
-    title: String
+    title: String,
   },
   data() {
     return {
-      listItems: listItems
+      listItems: listItems,
     }
-  }
+  },
 }
 </script>

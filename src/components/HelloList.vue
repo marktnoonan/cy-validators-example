@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import HelloListItem from "./HelloListItem"
+import HelloListItem from './HelloListItem'
 export default {
   name: 'HelloList',
   props: {
-    items: Array
+    items: Array,
   },
   components: {
-    HelloListItem
-  }
+    HelloListItem,
+  },
 }
 </script>

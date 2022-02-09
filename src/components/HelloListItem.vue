@@ -14,7 +14,7 @@
 export default {
   name: 'HelloListItem',
   props: {
-    content: Object
+    content: Object,
   },
 }
 </script>

@@ -1,31 +1,38 @@
 <template>
   <nav :data-cy-component="$options.name" class="nav">
-  <img class="logo" alt="Vue logo" src="../assets/logo.png" height="40" width="40" />
+    <img
+      class="logo"
+      alt="Vue logo"
+      src="../assets/logo.png"
+      height="40"
+      width="40"
+    />
     <HelloList
-      :items="[{
-        name: 'Home',
-        href: '#/',
-        active: $route.path === '/'
-      },
-      {
-        name: 'Some other place',
-        href: '#/other-place',
-        active: $route.path === '/other-place'
-      }
+      :items="[
+        {
+          name: 'Home',
+          href: '#/',
+          active: $route.path === '/',
+        },
+        {
+          name: 'Some other place',
+          href: '#/other-place',
+          active: $route.path === '/other-place',
+        },
       ]"
     />
   </nav>
 </template>
 
 <script>
-import HelloList from "./HelloList.vue"
+import HelloList from './HelloList.vue'
 export default {
   name: 'HeaderBar',
   components: {
     HelloList,
   },
   props: {
-    content: Object
+    content: Object,
   },
 }
 </script>
@@ -39,7 +46,7 @@ export default {
   align-items: center;
 }
 
-.nav >>> [data-cy-component=HelloListItem] a {
+.nav >>> [data-cy-component='HelloListItem'] a {
   text-decoration: none;
   font-weight: bold;
 }
@@ -47,6 +54,4 @@ export default {
 .logo {
   margin-right: 20px;
 }
-
 </style>
-

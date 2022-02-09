@@ -5,7 +5,7 @@
     <ErrorMessage v-else-if="error" message="No query params, please!" />
     <div v-else>
       <img alt="Vue logo" src="./assets/logo.png" width="60" height="60" />
-      <router-view title="Welcome to Your Vue.js App"/>
+      <router-view title="Welcome to Your Vue.js App" />
     </div>
   </main>
 </template>
@@ -18,27 +18,27 @@ export default {
   name: 'App',
   components: {
     ErrorMessage,
-    HeaderBar
+    HeaderBar,
   },
   data() {
     return {
       loading: true,
-      error: false
+      error: false,
     }
   },
   created() {
     setTimeout(() => {
       this.loading = false
     }, 1000)
-    if (window.location.hash.includes("?")) {
+    if (window.location.hash.includes('?')) {
       this.error = true
     }
-  }
+  },
 }
 </script>
 
 <style>
-@import "./global.css";
+@import './global.css';
 
 #app {
   margin: 0;

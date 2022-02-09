@@ -1,16 +1,14 @@
 /* eslint-disable no-undef */
-import HeaderBar from "./HeaderBar.vue"
+import HeaderBar from './HeaderBar.vue'
 import router from '../router'
 
 describe('<HeaderBar />', { viewportHeight: 80, viewportWidth: 800 }, () => {
-
   it('renders', () => {
     cy.mount(<HeaderBar />, {
       global: {
-        plugins: [router]
-      }
+        plugins: [router],
+      },
     })
     cy.validate(HeaderBar.name, { testData: { activeItemName: 'Home' } })
   })
-
 })

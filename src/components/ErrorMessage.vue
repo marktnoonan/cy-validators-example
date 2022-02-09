@@ -1,6 +1,6 @@
 <template>
   <p :data-cy-component="$options.name">
-    {{message}}
+    {{ message }}
   </p>
 </template>
 
@@ -8,13 +8,13 @@
 export default {
   name: 'ErrorMessage',
   props: {
-      message: String
-  }
+    message: String,
+  },
 }
 </script>
 
 <style scoped>
 p {
-    color: darkred
+  color: darkred;
 }
 </style>

@@ -1,9 +1,8 @@
 /* eslint-disable no-undef */
-import HelloIntro from "./HelloIntro.vue"
+import HelloIntro from './HelloIntro.vue'
 
-describe('<HelloIntro />', {viewportHeight: 200}, () => {
+describe('<HelloIntro />', { viewportHeight: 200 }, () => {
   it('renders', () => {
-
     cy.mount(<HelloIntro />)
     cy.validate(HelloIntro.name)
   })

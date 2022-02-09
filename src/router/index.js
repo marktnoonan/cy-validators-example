@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import HelloWorld from "../views/HelloWorld.vue"
-import OtherPlace from "../views/OtherPlace.vue"
+import HelloWorld from '../views/HelloWorld.vue'
+import OtherPlace from '../views/OtherPlace.vue'
 const routes = [
   {
     path: '/',
@@ -10,13 +10,13 @@ const routes = [
   {
     path: '/other-place',
     name: 'Other place',
-    component: OtherPlace
-  }
+    component: OtherPlace,
+  },
 ]
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
 })
 
 export default router

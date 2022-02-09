@@ -1,9 +1,8 @@
 /* eslint-disable no-undef */
-import OtherPlace from "./OtherPlace.vue"
+import OtherPlace from './OtherPlace.vue'
 
-describe('<OtherPlace />', {viewportHeight: 800, viewportWidth: 1200}, () => {
+describe('<OtherPlace />', { viewportHeight: 800, viewportWidth: 1200 }, () => {
   it('renders', () => {
-
     cy.mount(<OtherPlace />)
 
     // Pass the test title as an option to the validator.

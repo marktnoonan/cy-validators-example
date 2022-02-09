@@ -1,9 +1,8 @@
 /* eslint-disable no-undef */
-import HelloWorld from "./HelloWorld.vue"
+import HelloWorld from './HelloWorld.vue'
 
-describe('<Helloworld />', {viewportHeight: 800, viewportWidth: 1200}, () => {
+describe('<Helloworld />', { viewportHeight: 800, viewportWidth: 1200 }, () => {
   it('renders', () => {
-
     // create a test title
     const testTitle = 'hello test'
 
