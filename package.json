@@ -8,10 +8,10 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@cypress/vue": "^3.1.0",
+    "@cypress/vue": "^3.1.1",
     "@cypress/webpack-dev-server": "^1.8.0",
     "core-js": "^3.6.5",
-    "cypress": "https://cdn.cypress.io/beta/npm/10.0.0/darwin-x64/circle-10.0-release-f1390f5200687c9dcca990efb906f84dc6bb9f8d/cypress.tgz",
+    "cypress": "https://cdn.cypress.io/beta/npm/10.0.0/darwin-x64/circle-10.0-release-6cc047e2277967675f68d3af87ab3f723cf3f578/cypress.tgz",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vue-template-compiler": "^2.6.14"
