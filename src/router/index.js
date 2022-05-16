@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHashHistory, createMemoryHistory } from 'vue-router'
 import HelloWorld from '../views/HelloWorld.vue'
 import OtherPlace from '../views/OtherPlace.vue'
 const routes = [
@@ -15,7 +15,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: window.Cypress ? createMemoryHistory() : createWebHashHistory(),
   routes,
 })
 

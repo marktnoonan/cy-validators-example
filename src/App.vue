@@ -30,7 +30,7 @@ export default {
     setTimeout(() => {
       this.loading = false
     }, 1000)
-    if (window.location.hash.includes('?')) {
+    if (window.location.hash.includes('?') && !window.location.hash.includes('message')) {
       this.error = true
     }
   },
