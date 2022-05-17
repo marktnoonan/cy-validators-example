@@ -1,13 +1,13 @@
-import HackBuddy from './HackBuddy.vue'
+import FancyMessage from './FancyMessage.vue'
 
-describe('HackBuddy.cy.js', () => {
+describe('FancyMessage.cy.js', () => {
   it('shows a fallback message when no message is passed', () => {
-     cy.mount(<HackBuddy />)
+     cy.mount(<FancyMessage />)
      cy.contains('p', 'no message').should('be.visible')
   })
 
   it('shows a message when passed as a prop', () => {
-    cy.mount(<HackBuddy message="hello" />)
+    cy.mount(<FancyMessage message="hello" />)
     cy.contains('p', 'hello').should('be.visible')
  })
 })

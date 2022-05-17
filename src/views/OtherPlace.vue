@@ -1,7 +1,7 @@
 <template>
   <div :data-cy-component="$options.name" class="wrapper">
     <h1>Some Other Place</h1>
-    <HackBuddy :message="message" />
+    <FancyMessage :message="message" />
     <DisclosureWidget class="widget">
       <template #title>
         <h2>Outer Disclosure Title</h2>
@@ -25,13 +25,13 @@
 
 <script>
 import DisclosureWidget from '../components/DisclosureWidget.vue'
-import HackBuddy from '../components/HackBuddy.vue'
+import FancyMessage from '../components/FancyMessage.vue'
 
 export default {
   name: 'OtherPlace',
   components: {
     DisclosureWidget,
-    HackBuddy,
+    FancyMessage,
   },
   computed: {
     message() {

@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'HackBuddy',
+  name: 'FancyMessage',
   props: {
     message: {
         type: String,
