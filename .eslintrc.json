@@ -1,0 +1,13 @@
+{
+    "plugins": [
+        "cypress"
+    ],
+    "extends": [
+        "plugin:cypress/recommended"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    }
+}

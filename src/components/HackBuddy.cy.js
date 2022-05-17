@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 import HackBuddy from './HackBuddy.vue'
 
 describe('HackBuddy.cy.js', () => {

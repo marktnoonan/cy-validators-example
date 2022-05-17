@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import HeaderBar from './HeaderBar.vue'
 import router from '../router'
 

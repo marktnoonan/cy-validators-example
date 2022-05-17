@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import OtherPlace from './OtherPlace.vue'
 import router from '../router'
 

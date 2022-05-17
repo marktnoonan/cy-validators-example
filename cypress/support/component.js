@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { addValidateCommands } from './addValidateCommands'
 import {mount} from "@cypress/vue"
 // eslint-disable-next-line no-unused-vars
