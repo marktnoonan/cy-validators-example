@@ -11,7 +11,7 @@
     "@cypress/vue": "^3.1.1",
     "@cypress/webpack-dev-server": "^1.8.0",
     "core-js": "^3.6.5",
-    "cypress": "https://cdn.cypress.io/beta/npm/10.0.0/darwin-x64/circle-10.0-release-6cc047e2277967675f68d3af87ab3f723cf3f578/cypress.tgz",
+    "cypress": "https://cdn.cypress.io/beta/npm/10.0.0/darwin-x64/10.0-release-8d79472b7d569094c94836ecb6cd527ee5823111/cypress.tgz",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vue-template-compiler": "^2.6.14"

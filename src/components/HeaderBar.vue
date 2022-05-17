@@ -20,6 +20,11 @@
           href: '#/other-place',
           active: $route.path === '/other-place',
         },
+        {
+          name: 'New Page',
+          href: '#/new-page',
+          active: $route.path === '/new-page',
+        },
       ]"
     />
   </nav>
