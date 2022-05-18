@@ -32,19 +32,12 @@
     "env": {
       "node": true
     },
-    "plugins": [
-      "cypress"
-    ],
     "extends": [
       "plugin:vue/vue3-essential",
-      "eslint:recommended",
-      "plugin:cypress/recommended"
+      "eslint:recommended"
     ],
     "parserOptions": {
       "parser": "babel-eslint"
-    },
-    "ecmaFeatures": {
-      "jsx": true
     },
     "rules": {}
   },

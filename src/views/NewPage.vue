@@ -1,14 +1,16 @@
 <template>
   <div class="wrapper">
+    <FancyText content="hello" />
   </div>
 </template>
 
 <script>
+import FancyText from '../components/FancyText.vue'
 
 export default {
   name: 'NewPage',
   components: {
-    //
+    FancyText
   },
 }
 </script>
