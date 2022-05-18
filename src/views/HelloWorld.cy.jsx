@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+
 import HelloWorld from './HelloWorld.vue'
 
 describe('<Helloworld />', { viewportHeight: 800, viewportWidth: 1200 }, () => {

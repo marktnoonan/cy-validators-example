@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+
 import HelloIntro from './HelloIntro.vue'
 
 describe('<HelloIntro />', { viewportHeight: 200 }, () => {

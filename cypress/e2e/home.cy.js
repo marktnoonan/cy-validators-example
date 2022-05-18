@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+
 describe('the homepage', () => {
     it('renders error if a query param is passed', () => {
         cy.visit('/#/?test=ohno')

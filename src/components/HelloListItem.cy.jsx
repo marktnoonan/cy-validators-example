@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+
 import HelloListItem from './HelloListItem.vue'
 
 const testContent = { name: 'hello test', href: '#test-link-href' }

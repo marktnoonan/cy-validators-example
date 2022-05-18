@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+
 import { addValidateCommands } from './addValidateCommands'
 
 addValidateCommands()

@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+
 import ErrorMessage from './ErrorMessage.vue'
 
 describe('<ErrorMessage />', { viewportHeight: 60, viewportWidth: 300 }, () => {

@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+
 describe('the other place', () => {
     it('renders some content', () => {
         // go to the target page
