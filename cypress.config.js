@@ -1,6 +1,4 @@
 const { defineConfig } = require("cypress");
-const { startDevServer } = require("@cypress/webpack-dev-server");
-const webpackConfig = require("@vue/cli-service/webpack.config");
 
 module.exports = defineConfig({
     'e2e': {
@@ -9,11 +7,9 @@ module.exports = defineConfig({
         baseUrl: 'http://localhost:8080/ '
     },
     component: {
-        devServer(cypressDevServerConfig) {
-            return startDevServer({
-                options: cypressDevServerConfig,
-                webpackConfig,
-            });
+        devServer:{
+            framework: 'vue-cli',
+            bundler: 'webpack',
         },
         specPattern: "src/**/*.cy.{js,jsx,ts,tsx}",
         defaultCommandTimeout: 1000
