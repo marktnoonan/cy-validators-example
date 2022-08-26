@@ -11,10 +11,11 @@
     "@cypress/vue": "^3.1.1",
     "@cypress/webpack-dev-server": "^1.8.0",
     "core-js": "^3.6.5",
+    "cypress": "^10.6.0",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vue-template-compiler": "^2.6.14",
-    "cypress": "^9.6.1"
+    "webpack": "^4.39.3"
   },
   "devDependencies": {
     "@testing-library/cypress": "^8.0.2",
