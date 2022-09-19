@@ -5,9 +5,9 @@ describe('the other place', () => {
 
         // check HeaderBar with depth of 0 to confirm the component is found on the page
         // it is fully tested in `home.cy.js` so no need to duplicate here
-        // cy.validate('HeaderBar', {depth: 0, should: 'be.visible'})
+        cy.validate('HeaderBar', {depth: 0, should: 'be.visible'})
 
-        // cy.validate('OtherPlace')
+        cy.validate('OtherPlace')
         
         cy.contains('p', '~hello there~')
 

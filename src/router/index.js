@@ -15,7 +15,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: window.Cypress ? createMemoryHistory() : createWebHashHistory(),
+  history: window.__CYPRESS_TESTING_TYPE__ === 'component' ? createMemoryHistory() : createWebHashHistory(),
   routes,
 })
 
