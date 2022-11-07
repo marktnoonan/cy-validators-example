@@ -10,7 +10,7 @@
 
 </template>
 <script setup>
-import { onBeforeMount, onActivated, onBeforeUnmount, onBeforeUpdate, onMounted, onErrorCaptured } from 'vue';
+import { onBeforeMount, onBeforeUnmount, onBeforeUpdate, onMounted, onErrorCaptured } from 'vue';
 import {ref, watchEffect} from 'vue'
 import ParagraphWithSlotAndProp from './ParagraphWithSlotAndProp.vue';
 

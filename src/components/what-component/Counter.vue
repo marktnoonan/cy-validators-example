@@ -5,7 +5,7 @@
 <p>{{ count }}</p>
 </template>
 <script setup>
-import { onBeforeMount, onActivated, onBeforeUnmount, onBeforeUpdate, onMounted, onErrorCaptured } from 'vue';
+import { onBeforeMount, onBeforeUnmount, onBeforeUpdate, onMounted, onErrorCaptured } from 'vue';
 import {ref} from 'vue'
 
 const count = ref(0)

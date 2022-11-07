@@ -2,7 +2,7 @@
     <p>Hello I'm a paragraph!</p>
 </template>
 <script setup>
-import { onBeforeMount, onActivated, onBeforeUnmount, onBeforeUpdate, onMounted, onErrorCaptured } from 'vue';
+import { onBeforeMount, onBeforeUnmount, onBeforeUpdate, onMounted, onErrorCaptured } from 'vue';
 
 console.log('Hi from setup!')
 

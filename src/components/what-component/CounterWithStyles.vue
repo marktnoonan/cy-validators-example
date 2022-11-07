@@ -6,7 +6,7 @@
 
 </template>
 <script setup>
-import { onBeforeMount, onActivated, onBeforeUnmount, onBeforeUpdate, onMounted, onErrorCaptured } from 'vue';
+import { onBeforeMount, onBeforeUnmount, onBeforeUpdate, onMounted, onErrorCaptured } from 'vue';
 import {ref, watchEffect} from 'vue'
 
 const count = ref(0)
