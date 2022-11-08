@@ -1,4 +1,4 @@
-import Paragraph from './Paragraph.vue'
+import Paragraph from './1Paragraph.vue'
 
 describe('<Paragraph />', () => {
   it('renders', () => {

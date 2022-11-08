@@ -1,8 +1,8 @@
-import CounterUsingParagraph from './CounterUsingParagraph.vue'
+import Counter from './2Counter.vue'
 
-describe('<CounterUsingParagraph />', () => {
+describe('<Counter />', () => {
   it('renders', () => {
-    cy.mount(<CounterUsingParagraph />)
+    cy.mount(<Counter />)
 
     // What is is responsible for:
     

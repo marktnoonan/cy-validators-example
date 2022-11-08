@@ -1,6 +1,6 @@
 <template>
 <div class="counter">
-    <button @click="count++" aria-label="Increase count">+</button>
+    <button @click="handleClick" aria-label="Increase count">+</button>
     <ParagraphWithSlotAndProp
     size="large"
     >
@@ -10,19 +10,23 @@
 
 </template>
 <script setup>
-import { onBeforeMount, onBeforeUnmount, onBeforeUpdate, onMounted, onErrorCaptured } from 'vue';
-import {ref, watchEffect} from 'vue'
-import ParagraphWithSlotAndProp from './ParagraphWithSlotAndProp.vue';
+import { onBeforeMount, onBeforeUnmount, onBeforeUpdate, onMounted, onErrorCaptured, defineEmits } from 'vue';
+import {ref} from 'vue'
+import ParagraphWithSlotAndProp from './4ParagraphWithSlotAndProp.vue';
+
+const emit = defineEmits(['countedToFive'])
 
 const count = ref(0)
 
-watchEffect(() => {
-    // let's introduce a bug
-    if (count.value === 3) {
-        count.value = 5
+const handleClick = () => {
+    count.value++
+    if (count.value === 5) {
+        emit('countedToFive')
     }
-    console.log('watchEffect', count.value)
-})
+    if (count.value === 11) {
+        throw new Error('This one goes up to 11!')
+    }
+}
 
 console.log('Setup!')
 

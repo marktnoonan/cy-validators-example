@@ -1,4 +1,4 @@
-import FetchAfterCountingToFive from './FetchAfterCountingToFive.vue'
+import FetchAfterCountingToFive from './7FetchAfterCountingToFive.vue'
 
 describe('<FetchAfterCountingToFive />', () => {
   it('renders', () => {

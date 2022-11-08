@@ -1,8 +1,8 @@
-import Counter from './Counter.vue'
+import CounterUsingParagraph from './5CounterUsingParagraph.vue'
 
-describe('<Counter />', () => {
+describe('<CounterUsingParagraph />', () => {
   it('renders', () => {
-    cy.mount(<Counter />)
+    cy.mount(<CounterUsingParagraph />)
 
     // What is is responsible for:
     
@@ -15,6 +15,6 @@ describe('<Counter />', () => {
     .click()
 
     cy.contains('p', '0').should('not.exist')
-    cy.contains('p', '2').should('be.visible  ')
+    cy.contains('p', '2').should('be.visible')
   })
 })

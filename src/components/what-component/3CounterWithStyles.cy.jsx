@@ -1,4 +1,4 @@
-import CounterWithStyles from './CounterWithStyles.vue'
+import CounterWithStyles from './3CounterWithStyles.vue'
 
 describe('<CounterWithStyles />', () => {
   it('renders', () => {
