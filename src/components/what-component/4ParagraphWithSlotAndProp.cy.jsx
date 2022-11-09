@@ -21,18 +21,18 @@ describe('<ParagraphWithSlotAndProp />', () => {
     // but really we'd probably leave this to a visual regression test
   })
 
-  it('renders regular paragraph with expected content', () => {
+  it.only('renders regular paragraph with expected content', () => {
     cy.mount(
       <ParagraphWithSlotAndProp>
-        Hello I'm slot content!
+        Hello I'm regular text!
       </ParagraphWithSlotAndProp>
     )
 
     // we can test absence the class name directly - easy, but class name absence doesn't mean much
-    cy.contains('p:not(.large)', `Hello I'm slot content!`).should('be.visible')
+    cy.contains('p:not(.large)', `Hello I'm regular text!`).should('be.visible')
 
     // or we can make a more generic assertion that font size is 16px
-    cy.contains('p', `Hello I'm slot content!`).should(($el) => {
+    cy.contains('p', `Hello I'm regular text!`).should(($el) => {
       const fontSize = getComputedStyle($el[0]).fontSize
       expect(fontSize).to.eq('16px')
     })

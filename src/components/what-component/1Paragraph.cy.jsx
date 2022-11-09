@@ -6,5 +6,9 @@ describe('<Paragraph />', () => {
 
     cy.contains('p', `Hello I'm a paragraph!`)
     .should('be.visible')
+
+    cy.get('input')
+    .should('be.disabled')
+    
   })
 })

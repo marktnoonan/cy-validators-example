@@ -9,7 +9,7 @@
       <li>Name: {{ starWarsPerson.name }}</li>
     </ul>
   </div>
-  <div v-if="loading">Loading...</div>
+  <div v-if="state === 'loading'">Loading...</div>
 </template>
 <script setup>
 import {
