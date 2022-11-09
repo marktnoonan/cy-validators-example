@@ -1,6 +1,5 @@
 <template>
   <p>Hello I'm a paragraph!</p>
-  <input type="checkbox" disabled value>
 </template>
 <script setup>
 import {
