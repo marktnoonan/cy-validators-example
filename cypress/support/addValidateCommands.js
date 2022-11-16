@@ -1,6 +1,5 @@
-import '@testing-library/cypress/add-commands';
-
 import { validators } from '../../src/components/validators.js'
+import '@testing-library/cypress/add-commands'
 
 const defaultOptions = { selector: '', should: 'exist', testData: {} }
 
