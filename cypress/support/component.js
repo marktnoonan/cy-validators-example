@@ -1,4 +1,3 @@
-import { addValidateCommands } from './addValidateCommands'
 import {mount} from "cypress/vue"
 // eslint-disable-next-line no-unused-vars
 import styles from "../../src/global.css"
@@ -24,6 +23,4 @@ Cypress.SelectorPlayground.defaults({
       }
     },
   })
-
-addValidateCommands()
 

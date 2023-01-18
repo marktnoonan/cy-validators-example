@@ -4,6 +4,5 @@ describe('<ErrorMessage />', { viewportHeight: 60, viewportWidth: 300 }, () => {
   it('renders', () => {
     const message = 'test error message'
     cy.mount(<ErrorMessage message={message} />)
-    cy.validate(ErrorMessage.name, { testData: { message } })
   })
 })

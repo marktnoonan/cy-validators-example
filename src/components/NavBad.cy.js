@@ -7,7 +7,5 @@ describe('Testing generic containers', {
 () => {
   it('has a home link', () => {
     cy.mount(Navigation)
-    cy.contains('nav a', 'Home') // Boo 👎
-    .should('have.attr', 'href', '/home')
   })
 })

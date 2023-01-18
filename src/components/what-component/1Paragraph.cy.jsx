@@ -5,7 +5,5 @@ describe('<Paragraph />', () => {
     cy.mount(<Paragraph />)
     cy.contains('p', `Hello I'm a paragraph!`)
     .should('be.visible')
-
-    
   })
 })

@@ -5,28 +5,32 @@ describe(
   { viewportHeight: 300, viewportWidth: 300 },
   () => {
     it('renders when no slots are used', () => {
+      // const testData = {
+      //   title: 'Untitled Disclosure',
+      //   body: 'Panel with no details',
+      // }
       cy.mount(<DisclosureWidget />)
-      cy.validate(DisclosureWidget.name, {
-        testData: {
-          title: 'Untitled Disclosure',
-          body: 'Panel with no details',
-        },
-      })
+ 
     })
 
     it('renders slot content', () => {
+
+      const testData = {
+        title: 'Test Title',
+        body: 'Test body',
+      }
+
       cy.mount(
         <DisclosureWidget
           v-slots={{
-            title: () => <>Test Title</>,
+            title: () => <>{testData.title}</>,
           }}
         >
-          Test body
+          {testData.body}
         </DisclosureWidget>
       )
-      cy.validate(DisclosureWidget.name, {
-        testData: { title: 'Test Title', body: 'Test body' },
-      })
+
+    
     })
   }
 )

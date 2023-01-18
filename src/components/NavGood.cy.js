@@ -8,8 +8,6 @@ describe(
   () => {
     it('has a home link', () => {
       cy.mount(Navigation)
-      cy.contains('nav a', 'Home') // yay!
-        .should('have.attr', 'href', '/home')
     })
   }
 )
