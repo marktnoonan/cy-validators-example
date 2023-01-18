@@ -5,7 +5,7 @@ describe('<FetchAfterCountingToFive />', () => {
     cy.mount(<FetchAfterCountingToFive />)
   })
 
-  it('renders', () => {
+  it('renders', {defaultCommandTimeout: 10}, () => {
 
     cy.intercept('https://swapi.dev/api/people/*').as('swapiCall')
     cy.mount(<FetchAfterCountingToFive />)
@@ -21,9 +21,8 @@ describe('<FetchAfterCountingToFive />', () => {
     })
 
     // wait for the network request itself - optional
-    cy.wait('@swapiCall')
-    // cy.contains('li', 'Luke Skywalker').should('be.visible')
-
+    cy.wait('@swapiCall', {defaultCommandTimeout: 2000})
+    cy.contains('li', 'Luke Skywalker').should('be.visible')
 
     // wait for the side effect from the network request
 
@@ -33,8 +32,9 @@ describe('<FetchAfterCountingToFive />', () => {
     cy.contains('li', 'Nigel Tufnel').should('be.visible')
 
   })
-  it('renders with intercept', () => {
+  it.only('renders with intercept', () => {
     cy.mount(<FetchAfterCountingToFive />)
+    cy.log('hi')
 
     cy.intercept('https://swapi.dev/api/people/1/', {
       name: 'Chewbacca'

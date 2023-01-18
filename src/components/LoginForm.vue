@@ -3,18 +3,20 @@
     <form class="login" @submit.prevent="handleLogin" v-if="!isLoggedIn" autocomplete="off">
       <label for="username">Name</label>
       <input type="text" id="username" v-model="username" />
-      <button>Log In</button>
+      <HappyButton text="Log In" />
     </form>
     <div v-else>
       Hi {{username}}! 
-      <button @click="handleLogout">Log Out</button>
+      <HappyButton @click="handleLogout" text="Log Out" />
     </div>
   </div>
 </template>
 
 <script>
+import HappyButton from './HappyButton.vue'
 export default {
   name: 'LoginForm',
+  components: {HappyButton},
   data() {
     return {
       isLoggedIn: false,

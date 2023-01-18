@@ -7,7 +7,7 @@ describe('<OtherPlace />', { viewportHeight: 800, viewportWidth: 1200 }, () => {
     cy.contains('p', '~Some other place message~')
   })
 
-  it('renders messages from router', () => {
+  it.only('renders messages from router', () => {
     cy.mount(<OtherPlace />, {
       global: {
         plugins: [router],

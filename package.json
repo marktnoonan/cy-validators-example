@@ -21,7 +21,7 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "babel-eslint": "^10.1.0",
-    "cypress": "https://cdn.cypress.io/beta/npm/12.0.0/darwin-x64/release/12.0.0-8ff38cdb01adb1a4d317154d5baafa2eff5bad3d/cypress.tgz",
+    "cypress": "^12.3.0",
     "eslint": "^6.7.2",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-vue": "^7.0.0"

@@ -21,7 +21,7 @@ describe('<ParagraphWithSlotAndProp />', () => {
     // but really we'd probably leave this to a visual regression test
   })
 
-  it.only('renders regular paragraph with expected content', () => {
+  it('renders regular paragraph with expected content', () => {
     cy.mount(
       <ParagraphWithSlotAndProp>
         Hello I'm regular text!

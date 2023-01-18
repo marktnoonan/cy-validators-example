@@ -3,13 +3,12 @@ import CounterEmitsEvent from './6CounterEmitsEvent.vue'
 describe('<CounterEmitsEvent />', () => {
   it('renders', () => {
     const countedToFiveSpy = cy.spy().as('countedToFiveSpy')
-
-    cy.mount(<CounterEmitsEvent onCountedToFive={countedToFiveSpy} />).as('component')
+    cy.mount(<CounterEmitsEvent onCountedToFive={countedToFiveSpy} />)
 
     // What is is responsible for:
 
     cy.contains('p', '0').should('be.visible')
-
+    
     cy.findByLabelText('Increase count', {
       selector: 'button',
     }).as('countButton')
@@ -20,6 +19,7 @@ describe('<CounterEmitsEvent />', () => {
 
     cy.get('@countedToFiveSpy').should('have.been.calledOnce')
 
+    // go to 11, component should error
     cy.get('@countButton').click()
 
     // make a stub to be called when there is an error

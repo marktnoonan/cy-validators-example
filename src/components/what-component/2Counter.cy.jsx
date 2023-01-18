@@ -4,6 +4,8 @@ describe('<Counter />', () => {
   it('renders', () => {
     cy.mount(<Counter />)
 
+    cy.log('oh')
+
     // What is is responsible for:
     
     cy.contains('p', '0').should('be.visible')

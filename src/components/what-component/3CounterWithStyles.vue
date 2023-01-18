@@ -47,6 +47,7 @@ button {
     background-color: aqua;
     border: 2px solid salmon;
     padding: 0 40px;
+    font-size: 6rem;
 }
 
 .counter {

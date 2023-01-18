@@ -1,7 +1,7 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-  projectId: 'rsu428',
+  projectId: '69mv85',
     'e2e': {
         supportFile: 'cypress/support/e2e.js',
         specPattern: 'cypress/e2e/**/*',
@@ -14,7 +14,6 @@ module.exports = defineConfig({
             framework: 'vue-cli',
             bundler: 'webpack',
         },
-        specPattern: "src/**/*.cy.{js,jsx,ts,tsx}",
         defaultCommandTimeout: 1000
     },
 });

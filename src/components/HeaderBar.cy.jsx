@@ -8,6 +8,8 @@ describe('<HeaderBar />', { viewportHeight: 80, viewportWidth: 800 }, () => {
         plugins: [router],
       },
     })
+
+    cy.contains('Home')
     cy.validate(HeaderBar.name, { testData: { activeItemName: 'Home' } })
   })
 })

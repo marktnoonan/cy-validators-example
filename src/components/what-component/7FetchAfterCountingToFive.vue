@@ -1,4 +1,10 @@
 <template>
+<div v-if="apiError" class="error" aria-live="assertive">
+        ERROR!
+
+        {{ apiError }}
+    </div>
+
   <CounterEmitsEvent
     v-if="state !== 'tufnel'"
     @counted-to-five="handleCountedToFive"
@@ -24,6 +30,7 @@ import CounterEmitsEvent from './6CounterEmitsEvent.vue'
 
 const starWarsPerson = ref()
 const state = ref('initial')
+const apiError = ref('')
 
 const handleCountedToFive = async () => {
   state.value = 'loading'
@@ -53,12 +60,25 @@ onBeforeUpdate(() => {
   console.log('before update')
 })
 
-onErrorCaptured(() => {
+onErrorCaptured((error) => {
   console.log(
     "error captured in child component, will return false so the application doesn't throw"
   )
   starWarsPerson.value = { name: 'Nigel Tufnel' }
   state.value = 'tufnel'
+  console.log('captured error', error)
+  apiError.value = error
   return false
 })
 </script>
+
+<style>
+.error {
+    font-size: 2rem;
+    color: darkred;
+    text-align: center;
+    max-width: 90vw;
+    margin: 0 auto;
+}
+
+</style>
