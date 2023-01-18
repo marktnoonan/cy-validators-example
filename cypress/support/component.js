@@ -1,6 +1,8 @@
 import {mount} from "cypress/vue"
 // eslint-disable-next-line no-unused-vars
 import styles from "../../src/global.css"
+import '@testing-library/cypress/add-commands'
+
 
 Cypress.Commands.add("mount", (component, options) => {
     const root = document.querySelector("[data-cy-root]");

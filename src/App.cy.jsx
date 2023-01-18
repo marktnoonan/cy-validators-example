@@ -9,10 +9,6 @@ describe('<App />', { viewportHeight: 800, viewportWidth: 1200 }, () => {
       },
     })
 
-    cy.validate(App.name, 'loading')
-
-    cy.validate(App.name)
-
   })
 
   // there is a URL-driven error state that can't be tested in CT

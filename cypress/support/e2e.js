@@ -1,3 +1,5 @@
+import '@testing-library/cypress/add-commands'
+
 Cypress.SelectorPlayground.defaults({
     onElement: ($el) => {
       const component = $el.closest('[data-cy-component]')
