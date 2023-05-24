@@ -69,5 +69,4 @@ export function addValidateCommands() {
       return nameOrElement.closest('[data-cy-component]')
     }
   })
-
 }
