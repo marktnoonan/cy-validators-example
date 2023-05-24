@@ -70,4 +70,27 @@ export function addValidateCommands() {
     }
   })
 
+  // const topDocument = window.top.document
+
+  // if (!topDocument.querySelector('#aut-zoomer')) {
+  //   const input = topDocument.createElement('input')
+  //   input.setAttribute('id', 'aut-zoomer')
+  //   input.setAttribute('type', 'range')
+  //   input.setAttribute('min', 100)
+  //   input.setAttribute('max', 500)
+  //   input.setAttribute('style', `   
+  //     position: absolute;
+  //     bottom: 20px;
+  //     right: 20px;
+  //     width: 200px;
+  //   `)
+  //   input.addEventListener('change', (event) => {
+  //     const newVal = event.target.value
+  //     console.log('changed', )
+  //     topDocument.querySelector('#unified-runner').style.transform = `scale(${newVal/100})`
+  //   })
+  //   topDocument.querySelector('body').appendChild(input)
+  // }
+
+
 }
