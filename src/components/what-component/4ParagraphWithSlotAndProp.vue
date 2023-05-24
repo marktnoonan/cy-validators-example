@@ -16,7 +16,6 @@ const props = defineProps({
 
 <style scoped>
 .large {
-  font-size: 3vw;
-  /* font-size: 3rem; */
+  font-size: 3rem;
 }
 </style>

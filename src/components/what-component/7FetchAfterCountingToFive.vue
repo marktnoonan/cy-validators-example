@@ -20,14 +20,12 @@
     </ul>
   </div>
   <div v-if="state === 'loading'">
-    <!-- Loading... -->
-    Emojisplosion!
+    Loading...
   </div>
 </template>
 <script setup>
 import {  onErrorCaptured, ref } from 'vue'
 import CounterEmitsEvent from './6CounterEmitsEvent.vue'
-import { emojisplosion } from "emojisplosion";
 
 const starWarsPerson = ref()
 const state = ref('initial')
@@ -35,7 +33,6 @@ const apiError = ref('')
 
 const handleCountedToFive = async () => {
   state.value = 'loading'
-  emojisplosion() // seems suspicious
 
   fetch('https://swapi.dev/api/people/1/')
     .then(function (res) {

@@ -8,7 +8,7 @@
     </button>
     <p>{{ count }}</p>
   </div>
-  <div class="button-interferer" />
+  <!-- <div class="button-interferer" /> -->
 </template>
 <script setup>
 import {ref } from 'vue'
@@ -34,12 +34,6 @@ button {
     font-size: 2rem;
 }
 
-.button-interferer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
+
 
 </style>

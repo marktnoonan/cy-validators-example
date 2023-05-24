@@ -1,7 +1,7 @@
 <template>
-    <button>
-        {{props.text}} 😀
-    </button>
+  <button>
+    {{ props.text }} 😀
+  </button>
 </template>
 
 <script setup>

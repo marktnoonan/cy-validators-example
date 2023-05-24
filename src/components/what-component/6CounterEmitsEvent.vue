@@ -25,8 +25,7 @@ const handleClick = () => {
         emit('countedToFive')
     }
     if (count.value === 11) {
-        // whoops, not throwing error
-        // throw new Error('This one goes up to 11!')
+        throw new Error('This one goes up to 11!')
     }
 }
 

@@ -1,9 +1,14 @@
 <template>
   <div class="counter">
-    <button @click="count++">
+    <!-- <button @click="count++">
+      +
+    </button> -->
+    <button
+      aria-label="Increase count"
+      @click="count++"
+    >
       +
     </button>
-    <!-- <button @click="count++" aria-label="Increase count">+</button> -->
     <ParagraphWithSlotAndProp size="large">
       {{ count }}
     </ParagraphWithSlotAndProp>

@@ -1,3 +1,3 @@
 <template>
-  <div>Hello I'm a paragraph!</div>
+  <p>Hello I'm a paragraph!</p>
 </template>

@@ -1,10 +1,10 @@
 <template>
-  <div
+  <button
     aria-label="Increase count"
     @click="count++"
   >
     +
-  </div>
+  </button>
 
   <p>{{ count }}</p>
 </template>
