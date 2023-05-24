@@ -1,10 +1,20 @@
 <template>
   <HeaderBar />
   <main>
-    <p v-if="loading">Pretending to load...</p>
-    <ErrorMessage v-else-if="error" message="No query params, please!" />
+    <p v-if="loading">
+      Pretending to load...
+    </p>
+    <ErrorMessage
+      v-else-if="error"
+      message="No query params, please!"
+    />
     <div v-else>
-      <img alt="Vue logo" src="./assets/logo.png" width="60" height="60" />
+      <img
+        alt="Vue logo"
+        src="./assets/logo.png"
+        width="60"
+        height="60"
+      >
       <router-view title="Welcome to Your Vue.js App" />
     </div>
   </main>
@@ -29,7 +39,7 @@ export default {
   created() {
     setTimeout(() => {
       this.loading = false
-    }, 1000)
+    }, 450)
     if (window.location.hash.includes('?') && !window.location.hash.includes('message')) {
       this.error = true
     }

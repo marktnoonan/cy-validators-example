@@ -1,5 +1,8 @@
 <template>
-  <div class="hello" :data-cy-component="$options.name">
+  <div
+    class="hello"
+    :data-cy-component="$options.name"
+  >
     <h1>{{ title }}</h1>
     <HelloIntro />
     <h2>Installed CLI Plugins</h2>
@@ -9,7 +12,10 @@
     <h2>Ecosystem</h2>
     <HelloList :items="listItems.ecosystem" />
     <h2>An empty list</h2>
-    <HelloList data-cy="no-content-list" :items="[]" />
+    <HelloList
+      data-cy="no-content-list"
+      :items="[]"
+    />
   </div>
 </template>
 
@@ -22,7 +28,10 @@ export default {
   name: 'HelloWorld',
   components: { HelloList, HelloIntro },
   props: {
-    title: String,
+    title: {
+      type: String,
+      required: true
+    },
   },
   data() {
     return {

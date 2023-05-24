@@ -1,43 +1,19 @@
 <template>
-<div class="counter">
-    <button @click="count++" aria-label="Increase count">+</button>
+  <div class="counter">
+    <button
+      aria-label="Increase count"
+      @click="count++"
+    >
+      +
+    </button>
     <p>{{ count }}</p>
-</div>
-
+  </div>
+  <div class="button-interferer" />
 </template>
 <script setup>
-import { onBeforeMount, onBeforeUnmount, onBeforeUpdate, onMounted, onErrorCaptured } from 'vue';
-import {ref, watchEffect} from 'vue'
+import {ref } from 'vue'
 
 const count = ref(0)
-
-watchEffect(() => {
-    // let's introduce a bug
-    // if (count.value === 3) {
-    //     count.value = 5
-    // }
-    console.log('watchEffect', count.value)
-})
-
-console.log('Setup!')
-
-onBeforeMount(() => {
-    console.log('before mount')
-})
-
-onMounted(() => {
-    console.log('mounted!')
-})
-onBeforeUnmount(() => {
-    console.log('before unmount')
-})
-onBeforeUpdate(() => {
-    console.log(`before update, count has changed to ${count.value}`, )
-})
-
-onErrorCaptured(() => {
-    console.log('error, panic??')
-})
 
 </script>
 
@@ -56,6 +32,14 @@ button {
     justify-content: center;
     margin-top: 20px;
     font-size: 2rem;
+}
+
+.button-interferer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 </style>

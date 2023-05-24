@@ -1,5 +1,8 @@
 <template>
-  <div :data-cy-component="$options.name" class="wrapper">
+  <div
+    :data-cy-component="$options.name"
+    class="wrapper"
+  >
     <h1>Some Other Place</h1>
     <FancyMessage :message="message" />
     <DisclosureWidget class="widget">

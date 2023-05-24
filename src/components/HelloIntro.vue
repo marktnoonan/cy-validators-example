@@ -2,14 +2,18 @@
   <div :data-cy-component="$options.name">
     <p>
       For a guide and recipes on how to configure / customize this project,
-      <br />check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener"
-        >vue-cli documentation</a
-      >.
+      <br>check out the
+      <a
+        href="https://cli.vuejs.org"
+        target="_blank"
+        rel="noopener"
+      >vue-cli documentation</a>.
     </p>
 
     <DisclosureWidget class="widget">
-      <template #title>For some interactivity, check this out</template>
+      <template #title>
+        For some interactivity, check this out
+      </template>
       I am a Disclosure Widget being awesome.
     </DisclosureWidget>
   </div>

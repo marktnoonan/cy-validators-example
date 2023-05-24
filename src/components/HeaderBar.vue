@@ -1,31 +1,33 @@
 <template>
-<div :data-cy-component="$options.name" class="nav-layout">  
-  <nav class="nav">
-    <img
-      class="logo"
-      alt="Vue logo"
-      src="../assets/logo.png"
-      height="40"
-      width="40"
-    />
-    <HelloList
-      :items="[
-        {
-          name: 'Home',
-          href: '#/',
-          active: $route.path === '/',
-        },
-        {
-          name: 'Some other place',
-          href: '#/other-place',
-          active: $route.path === '/other-place',
-        },
-      ]"
-    />
-  </nav>
- <LoginForm />
-</div>
-
+  <div
+    :data-cy-component="$options.name"
+    class="nav-layout"
+  >  
+    <nav class="nav">
+      <img
+        class="logo"
+        alt="Vue logo"
+        src="../assets/logo.png"
+        height="40"
+        width="40"
+      >
+      <HelloList
+        :items="[
+          {
+            name: 'Home',
+            href: '#/',
+            active: $route.path === '/',
+          },
+          {
+            name: 'Some other place',
+            href: '#/other-place',
+            active: $route.path === '/other-place',
+          },
+        ]"
+      />
+    </nav>
+    <LoginForm />
+  </div>
 </template>
 
 <script>
@@ -38,7 +40,10 @@ export default {
     LoginForm
   },
   props: {
-    content: Object,
+    content: {
+      type: Object,
+      required: true
+    },
   },
 }
 </script>

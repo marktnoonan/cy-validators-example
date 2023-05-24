@@ -14,6 +14,6 @@ module.exports = defineConfig({
             framework: 'vue-cli',
             bundler: 'webpack',
         },
-        defaultCommandTimeout: 1000
+        defaultCommandTimeout: 500
     },
 });

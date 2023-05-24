@@ -9,7 +9,6 @@ describe('<FetchAfterCountingToFive />', () => {
 
     cy.intercept('https://swapi.dev/api/people/*').as('swapiCall')
     cy.mount(<FetchAfterCountingToFive />)
-
     cy.contains('p', '0').should('be.visible')
 
     cy.findByLabelText('Increase count', {
@@ -19,6 +18,8 @@ describe('<FetchAfterCountingToFive />', () => {
     Cypress._.times(10, () => {
       cy.get('@countButton').click()
     })
+    cy.contains('Loading...')
+
 
     // wait for the network request itself - optional
     cy.wait('@swapiCall', {defaultCommandTimeout: 2000})
@@ -32,9 +33,8 @@ describe('<FetchAfterCountingToFive />', () => {
     cy.contains('li', 'Nigel Tufnel').should('be.visible')
 
   })
-  it.only('renders with intercept', () => {
+  it('renders with intercept', () => {
     cy.mount(<FetchAfterCountingToFive />)
-    cy.log('hi')
 
     cy.intercept('https://swapi.dev/api/people/1/', {
       name: 'Chewbacca'

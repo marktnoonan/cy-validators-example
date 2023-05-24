@@ -1,9 +1,13 @@
 <template>
-<div v-if="apiError" class="error" aria-live="assertive">
-        ERROR!
+  <div
+    v-if="apiError"
+    class="error"
+    aria-live="assertive"
+  >
+    ERROR!
 
-        {{ apiError }}
-    </div>
+    {{ apiError }}
+  </div>
 
   <CounterEmitsEvent
     v-if="state !== 'tufnel'"
@@ -15,18 +19,15 @@
       <li>Name: {{ starWarsPerson.name }}</li>
     </ul>
   </div>
-  <div v-if="state === 'loading'">Loading...</div>
+  <div v-if="state === 'loading'">
+    <!-- Loading... -->
+    Emojisplosion!
+  </div>
 </template>
 <script setup>
-import {
-  onBeforeMount,
-  onBeforeUnmount,
-  onBeforeUpdate,
-  onMounted,
-  onErrorCaptured,
-  ref,
-} from 'vue'
+import {  onErrorCaptured, ref } from 'vue'
 import CounterEmitsEvent from './6CounterEmitsEvent.vue'
+import { emojisplosion } from "emojisplosion";
 
 const starWarsPerson = ref()
 const state = ref('initial')
@@ -34,6 +35,8 @@ const apiError = ref('')
 
 const handleCountedToFive = async () => {
   state.value = 'loading'
+  emojisplosion() // seems suspicious
+
   fetch('https://swapi.dev/api/people/1/')
     .then(function (res) {
       return res.json()
@@ -43,22 +46,6 @@ const handleCountedToFive = async () => {
       starWarsPerson.value = data
     })
 }
-
-console.log('Hi from setup!')
-
-onBeforeMount(() => {
-  console.log('before mount')
-})
-
-onMounted(() => {
-  console.log('mounted!')
-})
-onBeforeUnmount(() => {
-  console.log('before unmount')
-})
-onBeforeUpdate(() => {
-  console.log('before update')
-})
 
 onErrorCaptured((error) => {
   console.log(
@@ -70,6 +57,7 @@ onErrorCaptured((error) => {
   apiError.value = error
   return false
 })
+
 </script>
 
 <style>

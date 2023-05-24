@@ -4,17 +4,25 @@
     <button
       type="button"
       :aria-expanded="expanded"
-      @click="toggleDisclosure"
       :aria-controls="id"
+      @click="toggleDisclosure"
     >
       <span>
-        <svg viewBox="0 0 80 80" focusable="false">
+        <svg
+          viewBox="0 0 80 80"
+          focusable="false"
+        >
           <path d="M70.3 13.8L40 66.3 9.7 13.8z" />
         </svg>
       </span>
-      <slot name="title">Untitled Disclosure 😱</slot>
+      <slot name="title">
+        Untitled Disclosure 😱
+      </slot>
     </button>
-    <div :id="id" class="disclosee">
+    <div
+      :id="id"
+      class="disclosee"
+    >
       <p>
         <slot>Panel with no details 😬</slot>
       </p>

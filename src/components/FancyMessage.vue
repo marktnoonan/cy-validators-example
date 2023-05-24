@@ -1,6 +1,6 @@
 <template>
   <p>
-   ~{{ message }}~
+    ~{{ message }}~
   </p>
 </template>
 
