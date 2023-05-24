@@ -18,7 +18,7 @@ describe(
     })
 
     context('the default state', () => {
-      it('renders with hash links', () => {
+      it.only('renders with hash links', () => {
         cy.mount(<HelloListItem content={testContent} />)
         cy.validate(HelloListItem.name, { testData: testContent })
       })

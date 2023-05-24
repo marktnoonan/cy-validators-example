@@ -4,10 +4,6 @@ describe('the homepage', () => {
         cy.validate('App', 'loading')
         cy.validate('ErrorMessage', {testData: {message: 'No query params, please!'}})
         cy.getComponent('HelloWorld').should('not.exist')
-        /* ==== Generated with Cypress Studio ==== */
-        cy.get('.__cypress-selector-playground').click();
-        cy.get('.active > a').click();
-        /* ==== End Cypress Studio ==== */
     })
     it('renders expected contents on successful visit', () => {
         cy.visit('/')

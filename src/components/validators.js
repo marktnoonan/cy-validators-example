@@ -156,9 +156,13 @@ export const validators = {
       // and that the link format is OK according to our validLinkFormat function
       cy.contains('a', name)
         .should('be.visible')
-        .within(($el) => {
+        .each($el => {
+          console.log('each list item', $el.attr('href'), href)
           expect($el.attr('href')).to.eq(href).and.satisfy(validLinkFormat)
         })
+        // .within(($el) => {
+        //   expect($el.attr('href')).to.eq(href).and.satisfy(validLinkFormat)
+        // })
     },
   },
   HelloList: {

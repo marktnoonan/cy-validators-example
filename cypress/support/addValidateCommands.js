@@ -52,10 +52,11 @@ export function addValidateCommands() {
 
     return cy.getComponent(name, resolvedOptions.selector)
       .as('component')
-      .within(() => {
+      .then(() => {
         resolvedOptions.component = cy.get('@component')
         validatorFn(resolvedOptions)
       })
+
   })
 
   Cypress.Commands.add('getComponent', (nameOrElement, selector) => {
