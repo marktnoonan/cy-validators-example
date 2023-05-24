@@ -18,6 +18,11 @@
     <ul>
       <li>Name: {{ starWarsPerson.name }}</li>
     </ul>
+    <img
+      v-if="starWarsPerson.name === 'Nigel Tufnel'"
+      src="../../assets/tufnell.jpeg"
+      width="200"
+    >
   </div>
   <div v-if="state === 'loading'">
     Loading...
