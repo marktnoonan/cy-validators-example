@@ -15,17 +15,14 @@ describe('<FetchAfterCountingToFive />', () => {
       selector: 'button',
     }).as('countButton')
 
+    // NOTE: will be flaky
     Cypress._.times(10, () => {
       cy.get('@countButton').click()
     })
+
     cy.contains('Loading...')
-
-
-    // wait for the network request itself - optional
     cy.wait('@swapiCall', {defaultCommandTimeout: 2000})
     cy.contains('li', 'Luke Skywalker').should('be.visible')
-
-    // wait for the side effect from the network request
 
     cy.get('@countButton').click()
 
