@@ -11,9 +11,12 @@ describe('<LoginForm />', { viewportHeight: 60, viewportWidth: 300 }, () => {
     cy.validate(LoginForm.name, 'logoutFlow')
   })
 
-  it.only('Logs In', () => {
+  it.only('Logs In with Happiness', () => {
     cy.mount(<LoginForm />)
     cy.contains('Log In 😀').click()
     cy.contains('Log Out 😀')
+
+    // Note this doesn't mention HappyButton at all
+    // Or its props/values etc.
   })
 })
