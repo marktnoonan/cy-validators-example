@@ -18,6 +18,12 @@ jobs:
     name: Run End-to-End Tests
     runs-on: ubuntu-latest
     container: cypress/browsers:node12.18.3-chrome87-ff82
+    strategy:
+      # don't fail the entire matrix on failure
+      fail-fast: false
+      matrix:
+        # run copies of the current job in parallel
+        containers: [1, 2, 3]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -47,6 +53,12 @@ jobs:
     name: Run Component Tests
     runs-on: ubuntu-latest
     container: cypress/browsers:node12.18.3-chrome87-ff82
+    strategy:
+      # don't fail the entire matrix on failure
+      fail-fast: false
+      matrix:
+        # run copies of the current job in parallel
+        containers: [1, 2, 3]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
