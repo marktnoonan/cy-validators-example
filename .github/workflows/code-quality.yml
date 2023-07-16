@@ -36,7 +36,8 @@ jobs:
     name: Run End-to-End Tests
     needs: install
     runs-on: ubuntu-latest
-    container: cypress/browsers:node12.18.3-chrome87-ff82
+    container: 
+      image: cypress/browsers:node12.18.3-chrome87-ff82
     strategy:
       # don't fail the entire matrix on failure
       fail-fast: false
@@ -68,7 +69,8 @@ jobs:
     name: Run Component Tests
     runs-on: ubuntu-latest
     needs: install
-    container: cypress/browsers:node12.18.3-chrome87-ff82
+    container: 
+      image: cypress/browsers:node12.18.3-chrome87-ff82
     strategy:
       # don't fail the entire matrix on failure
       fail-fast: false
