@@ -33,42 +33,10 @@ jobs:
           if-no-files-found: error
           path: dist
 
-  cypress-run-e2e:
+  cypress-run:
     name: Run End-to-End Tests
     needs: install
     runs-on: ubuntu-latest
-    container: cypress/browsers:node16.16.0-chrome107-ff107-edge
-    strategy:
-      # don't fail the entire matrix on failure
-      fail-fast: false
-      matrix:
-        # run copies of the current job in parallel
-        containers: [1, 2]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Download the build folder
-        uses: actions/download-artifact@v3
-        with:
-          name: build
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v5.8.3
-        with:
-          browser: electron
-          start: npm run serve
-          wait-on: 'http://localhost:8080'
-          record: true
-          parallel: true 
-        env: 
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  cypress-run-component:
-    name: Run Component Tests
-    runs-on: ubuntu-latest
-    needs: install
     container: cypress/browsers:node16.16.0-chrome107-ff107-edge
     strategy:
       # don't fail the entire matrix on failure
@@ -85,7 +53,19 @@ jobs:
         with:
           name: build
 
-      - name: Cypress run
+      - name: Cypress run e2e
+        uses: cypress-io/github-action@v5.8.3
+        with:
+          browser: electron
+          start: npm run serve
+          wait-on: 'http://localhost:8080'
+          record: true
+          parallel: true 
+        env: 
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Cypress component
         uses: cypress-io/github-action@v5.8.3
         with:
           browser: electron
