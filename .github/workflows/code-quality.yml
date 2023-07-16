@@ -1,4 +1,4 @@
-name: Code Quality
+name: Cypress Tests
 
 on:
   push:
@@ -34,6 +34,13 @@ jobs:
           # Specify Browser since container image is compile with Firefox
           browser: chrome
           start: npm run serve
+          wait-on: 'http://localhost:3000'
+          record: true
+          parallel: true 
+        env: 
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
   cypress-run-component:
 
@@ -56,3 +63,8 @@ jobs:
           # Specify Browser since container image is compile with Firefox
           browser: chrome
           component: true
+          record: true
+          parallel: true 
+        env: 
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
