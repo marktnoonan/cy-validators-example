@@ -35,7 +35,7 @@ jobs:
           browser: chrome
           start: npm run serve
 
-cypress-run-component:
+  cypress-run-component:
 
     name: Run Component Tests
     runs-on: ubuntu-latest
