@@ -34,7 +34,7 @@ jobs:
           # Specify Browser since container image is compile with Firefox
           browser: chrome
           start: npm run serve
-          wait-on: 'http://localhost:3000'
+          wait-on: 'http://localhost:8080'
           record: true
           parallel: true 
         env: 
