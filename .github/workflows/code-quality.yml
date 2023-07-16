@@ -22,8 +22,6 @@ jobs:
         with:
           # Disable running of tests within install job
           runTests: false
-      - name: Checkout
-        uses: actions/checkout@v3
 
   cypress-run-e2e:
     name: Run End-to-End Tests
