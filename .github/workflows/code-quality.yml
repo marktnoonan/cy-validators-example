@@ -60,6 +60,7 @@ jobs:
           start: npm run serve
           wait-on: 'http://localhost:8080'
           record: true
+          parallel: true 
         env: 
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -90,7 +91,6 @@ jobs:
           browser: electron
           component: true
           record: true
-          parallel: true 
         env: 
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
